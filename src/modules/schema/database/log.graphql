@@ -1,0 +1,16 @@
+
+enum LogLevel {
+  Info
+  Notice
+  Warning
+  Error
+  Fatal
+}
+
+type Log {
+  id: ID! @unique
+  level: LogLevel! @default(value: Info)
+  objectType: ID
+  message: String!
+  stack: String
+}

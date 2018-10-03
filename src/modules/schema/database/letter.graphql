@@ -1,0 +1,15 @@
+
+enum LetterStatus{
+  Created
+  Processing
+  Sended
+  Error
+}
+
+type Letter {
+  id: ID! @unique
+  email: String!
+  subject: String!
+  message: String!
+  status: LetterStatus! @default(value: Created)
+}

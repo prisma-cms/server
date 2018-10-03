@@ -1,0 +1,24 @@
+type User implements Node { 
+
+  hasEmail: Boolean!
+  hasPhone: Boolean!
+}
+ 
+ 
+type UserResponse {
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: User
+}
+ 
+ 
+type AuthPayload {
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  token: String
+  data: User
+}
+
+ 

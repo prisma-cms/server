@@ -1,0 +1,50 @@
+
+type User{
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  username: String @unique
+  email: String @unique
+  phone: String 
+
+  showEmail: Boolean @default(value: false)
+  showPhone: Boolean @default(value: false)
+
+  password: String
+  fullname: String
+  image: String
+  address: String
+
+  files: [File!]! @relation(name: "UserFiles")
+
+  sudo: Boolean @default(value: false)
+  active: Boolean @default(value: true)
+
+  # Признак того, что пришел пользователь и активировал свою анкету
+  activated: Boolean @default(value: false)
+
+  deleted: Boolean @default(value: false)
+
+  Groups: [UserGroup!]! @relation(name: "UserGroups")
+
+  CreatedUsers: [User!]! @relation(name: "UserCreatedBy", onDelete: SET_NULL)
+  CreatedBy: User @relation(name: "UserCreatedBy", onDelete: SET_NULL) 
+
+  LogedIns: [LogedIn!]! @relation (name: "UserLogedIn")
+}
+ 
+
+type UserGroup {
+  id: ID! @unique
+  name: String! @unique
+  Users: [User!]! @relation(name: "UserGroups")
+  # Permissions: [Permission!]! @relation(name: "GroupPermissions")
+}
+
+type LogedIn {
+  id: ID! @unique
+  createdAt: DateTime!
+  fake: Boolean @default(value: true)
+  User: User! @relation (name: "UserLogedIn")
+}
+ 
