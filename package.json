@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.1.13-beta",
+  "version": "1.1.14-beta",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,7 +36,7 @@
     "@prisma-cms/prisma-module": "^1.0.3-beta",
     "@prisma-cms/prisma-processor": "^1.0.2-beta",
     "@prisma-cms/prisma-schema": "^1.0.2-beta",
-    "@prisma-cms/prisma-uploads": "^1.0.2-beta",
+    "@prisma-cms/prisma-uploads": "^1.0.3-beta",
     "bcryptjs": "^2.4.3",
     "dgram": "^1.0.1",
     "dns": "^0.2.2",

@@ -336,7 +336,7 @@ class UserPayload extends Processor {
         birthday,
         ...data
       },
-      where,
+      where = {},
       id,
     } = args;
 
