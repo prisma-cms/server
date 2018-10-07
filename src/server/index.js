@@ -2,7 +2,7 @@
 
 import Mailer from "../plugins/Mailer";
 
-
+import sendmailServer from "sendmail";
 
 const fs = require("fs");
 
@@ -21,8 +21,6 @@ const resolvers = coreModule.getResolvers();
 const endpoint = process.env.endpoint;
 
 const Context = require("@prisma-cms/prisma-context");
-
-
 
 
 export default function (options = {}) {
@@ -68,7 +66,7 @@ export default function (options = {}) {
     ...sendmailOptions,
   }
 
-  const sendmail = require('sendmail')(sendmailOptions);
+  const sendmail = sendmailServer(sendmailOptions);
 
 
   knexOptions = {

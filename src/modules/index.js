@@ -11,11 +11,9 @@ import { parse } from "graphql";
 
 import UsersModule from "./user";
 import FilesModule from "./Files";
-import RouterModule from "./router";
 
 
 class CoreModule extends PrismaModule {
-
 
 
   constructor(options = {}) {
@@ -27,7 +25,6 @@ class CoreModule extends PrismaModule {
     modules = modules.concat([
       UsersModule,
       FilesModule,
-      RouterModule,
     ]);
 
     Object.assign(options, {

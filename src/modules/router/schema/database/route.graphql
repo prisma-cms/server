@@ -1,7 +1,0 @@
-
-type Route {
-  id: ID! @unique
-  path: String! @unique
-  exact: Boolean! @default(value: false)
-  component: String!
-}

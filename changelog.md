@@ -1,3 +1,8 @@
+1.1.15-beta
+=====================================
+- Remove router modules
+- Added tests
+
 1.1.14-beta
 =====================================
 - Fix user update
