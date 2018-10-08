@@ -737,6 +737,8 @@ const User = {
     return phone ? true : false;
 
   },
+
+  password: () => null,
 }
 
 

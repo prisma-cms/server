@@ -1,3 +1,8 @@
+1.1.16-beta
+=====================================
+- Tests
+- User::password return null
+
 1.1.15-beta
 =====================================
 - Remove router modules
