@@ -1,3 +1,8 @@
+1.1.18-beta
+=====================================
+- Upgrade @prisma-cms/prisma-uploads
+- Install sharp@0.21.0
+
 1.1.17-beta
 =====================================
 - Upgrade @prisma-cms/prisma-uploads
