@@ -1,3 +1,7 @@
+1.1.19-beta
+=====================================
+- Upgrade @prisma-cms/prisma-uploads
+
 1.1.18-beta
 =====================================
 - Upgrade @prisma-cms/prisma-uploads
