@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.1.19-beta",
+  "version": "1.2.0-beta",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -20,7 +20,6 @@
     "test:watch": "nwb test --server",
     "start": "nodemon src/index.js",
     "start-server": "Sendmail=true action=start-server node src/index.js",
-    "start-server-dev": "Sendmail=true SendmailTest=true action=start-server yarn start",
     "deploy": "run-s build-schema-prisma && yarn deploy-schema && yarn get-schema -p prisma && yarn build-schema-api",
     "deploy-force": "run-s build-schema-prisma && yarn deploy-schema -f && yarn get-schema -p prisma && yarn build-schema-api",
     "deploy-prod": "yarn deploy",
@@ -30,7 +29,15 @@
     "build-schema-api": "schemaType=api yarn build-schema",
     "build-schema": "action=build-schema node src/index.js",
     "voyager-prisma": "node_modules/graphql-cli/dist/bin.js voyager -p prisma",
-    "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app"
+    "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app",
+    
+    "deploy-dev": "run-s build-schema-prisma-dev && yarn deploy-schema-dev && yarn get-schema-dev -p prisma && yarn build-schema-api-dev",
+    "build-schema-prisma-dev": "schemaType=prisma yarn build-schema-dev",
+    "build-schema-dev": "action=build-schema node src/server/dev-server",
+    "deploy-schema-dev": "node_modules/prisma/dist/index.js deploy",
+    "get-schema-dev": "node_modules/graphql-cli/dist/bin.js get-schema -p prisma -o src/schema/generated/prisma.graphql",
+    "build-schema-api-dev": "schemaType=api yarn build-schema-dev",
+    "start-server-dev": "Sendmail=true SendmailTest=true action=start-server nodemon src/server/dev-server"
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.1-beta",

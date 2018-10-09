@@ -1,16 +1,11 @@
 
 
 import Mailer from "../plugins/Mailer";
-
 import sendmailServer from "sendmail";
-
-const fs = require("fs");
-
-const { GraphQLServer } = require('graphql-yoga')
-
-const ImageThumbMiddleware = require('../middleware/ImageThumb');
-
-const CoreModule = require("../modules");
+import CoreModule from "../modules";
+import ImageThumbMiddleware from "../middleware/ImageThumb";
+import {GraphQLServer} from "graphql-yoga";
+import Context from "@prisma-cms/prisma-context";
 
 const coreModule = new CoreModule({
 
@@ -19,8 +14,6 @@ const coreModule = new CoreModule({
 const resolvers = coreModule.getResolvers();
 
 const endpoint = process.env.endpoint;
-
-const Context = require("@prisma-cms/prisma-context");
 
 
 export default function (options = {}) {

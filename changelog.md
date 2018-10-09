@@ -1,3 +1,7 @@
+1.2.0-beta
+=====================================
+- Added dev-server
+
 1.1.19-beta
 =====================================
 - Upgrade @prisma-cms/prisma-uploads
