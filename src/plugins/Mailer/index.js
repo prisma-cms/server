@@ -30,6 +30,30 @@ class Mailer extends Payload {
 
   }
 
+
+  getConfig(){
+
+    const {
+      sendmail,
+      MailerProps,
+    } = this.ctx;
+
+    let {
+      mailSender,
+      delay = 60000,
+      ...other
+    } = MailerProps || {};
+
+    mailSender = mailSender || "no-reply@localhost";
+
+    return {
+      sendmail,
+      mailSender,
+      delay,
+      ...other
+    }
+  }
+
   start() {
 
     this.sendLetters();
@@ -42,6 +66,10 @@ class Mailer extends Payload {
     const {
       db,
     } = this.ctx;
+
+    const {
+      delay,
+    } = this.getConfig();
 
     const letter = (await db.query.letters({
       first: 1,
@@ -56,7 +84,7 @@ class Mailer extends Payload {
       this.sendLetter(letter);
     }
     else {
-      setTimeout(() => this.sendLetters(), 15000);
+      setTimeout(() => this.sendLetters(), delay);
     }
 
   }
@@ -130,7 +158,9 @@ class Mailer extends Payload {
 
     const {
       sendmail,
-    } = this.ctx;
+      mailSender = "no-reply@localhost",
+      footer = "",
+    } = this.getConfig();
 
     const host = process.env.HOST || "planner";
 
@@ -138,14 +168,12 @@ class Mailer extends Payload {
     return new Promise((resolve, reject) => {
 
       sendmail({
-        from: `no-reply@${host}`,
+        from: mailSender,
         to,
         subject,
         html: `${message}
         <hr />
-        <p>
-          С уважением, <a href="https://${host}">${host}</a>
-        </p>`,
+        ${footer}`,
       }, function(err, reply) {
         // console.log(err && err.stack);
         // console.dir(reply);

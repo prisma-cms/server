@@ -1,3 +1,20 @@
+1.3.0-beta
+=====================================
+- Added api fragments generation
+- Added Mailer server option
+- Added MailerProps
+
+### Example
+```
+MailerProps: {
+  mailSender: "no-replay@my_host",
+  footer: `<p>
+    Regards!
+  </p>`,
+  delay: 15000,
+}
+```
+
 1.2.0-beta
 =====================================
 - Added dev-server

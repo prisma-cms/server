@@ -4,7 +4,7 @@ import Mailer from "../plugins/Mailer";
 import sendmailServer from "sendmail";
 import CoreModule from "../modules";
 import ImageThumbMiddleware from "../middleware/ImageThumb";
-import {GraphQLServer} from "graphql-yoga";
+import { GraphQLServer } from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
 
 const coreModule = new CoreModule({
@@ -24,8 +24,16 @@ export default function (options = {}) {
     knexOptions,
     contextOptions,
     imagesMiddleware = ImageThumbMiddleware,
+    Mailer: MailerPlugin,
+    MailerProps,
+
     ...serverOptions
   } = options;
+
+
+  if (MailerPlugin === undefined) {
+    MailerPlugin = Mailer;
+  }
 
 
   let sendmailOptionsDefault = {
@@ -83,6 +91,7 @@ export default function (options = {}) {
     APP_SECRET: process.env.APP_SECRET,
     knex,
     sendmail,
+    MailerProps,
     ...contextOptions,
   }
 
@@ -111,10 +120,10 @@ export default function (options = {}) {
       const ctx = await context();
 
 
-      if (process.env.Sendmail === "true") {
+      if (process.env.Sendmail === "true" && MailerPlugin) {
 
         try {
-          new Mailer({
+          new MailerPlugin({
             ctx,
           }).start();
         }
