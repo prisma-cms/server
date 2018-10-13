@@ -4,6 +4,7 @@ import fs from "fs";
 import chalk from "chalk";
 
 import PrismaModule from "@prisma-cms/prisma-module";
+import RouterModule from "@prisma-cms/router";
 
 import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
 
@@ -25,6 +26,7 @@ class CoreModule extends PrismaModule {
     modules = modules.concat([
       UsersModule,
       FilesModule,
+      RouterModule,
     ]);
 
     Object.assign(options, {

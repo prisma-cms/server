@@ -1,3 +1,7 @@
+1.3.1-beta
+=====================================
+- Restore router modules
+
 1.3.0-beta
 =====================================
 - Added api fragments generation
