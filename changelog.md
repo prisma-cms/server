@@ -1,3 +1,7 @@
+1.5.1-beta
+=====================================
+- Upgrade packages
+
 1.5.0-beta
 =====================================
 - Breaking changes: main /lib/index.js become /lib/server/index.js
