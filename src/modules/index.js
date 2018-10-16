@@ -14,7 +14,7 @@ import UsersModule from "./user";
 import FilesModule from "./Files";
 
 
-class CoreModule extends PrismaModule {
+class CmsModule extends PrismaModule {
 
 
   constructor(options = {}) {
@@ -91,4 +91,4 @@ class CoreModule extends PrismaModule {
 }
 
 
-export default CoreModule;
+export default CmsModule;

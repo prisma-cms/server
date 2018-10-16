@@ -1,9 +1,9 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.3.1-beta",
+  "version": "1.5.0-beta",
   "description": "",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "lib/server/index.js",
+  "module": "src/server/index.js",
   "files": [
     "src",
     "es",
@@ -18,8 +18,8 @@
     "test-nwb": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
-    "start": "nodemon src/index.js",
-    "start-server": "Sendmail=true action=start-server node src/index.js",
+    "start": "Sendmail=true action=start-server node src/index.js",
+    "start-dev": "Sendmail=true action=start-server nodemon src/index.js",
     "deploy": "run-s build-schema-prisma && yarn deploy-schema && yarn get-schema -p prisma && yarn build-schema-api",
     "deploy-force": "run-s build-schema-prisma && yarn deploy-schema -f && yarn get-schema -p prisma && yarn build-schema-api",
     "deploy-prod": "yarn deploy",
@@ -29,15 +29,7 @@
     "build-schema-api": "schemaType=api yarn build-schema",
     "build-schema": "action=build-schema node src/index.js",
     "voyager-prisma": "node_modules/graphql-cli/dist/bin.js voyager -p prisma",
-    "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app",
-    "deploy-dev": "run-s build-schema-prisma-dev && yarn deploy-schema-dev && yarn get-schema-dev -p prisma && yarn build-schema-api-dev",
-    "build-schema-prisma-dev": "schemaType=prisma yarn build-schema-dev",
-    "build-schema-dev": "action=build-schema node src/server/dev-server",
-    "deploy-schema-dev": "node_modules/prisma/dist/index.js deploy",
-    "get-schema-dev": "node_modules/graphql-cli/dist/bin.js get-schema -p prisma -o src/schema/generated/prisma.graphql",
-    "build-schema-api-dev": "schemaType=api run-s build-schema-dev && yarn generate-fragments-api-dev",
-    "generate-fragments-api-dev": "graphql generate-fragments --verbose",
-    "start-server-dev": "Sendmail=true SendmailTest=true action=start-server nodemon src/server/dev-server"
+    "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app"
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.1-beta",

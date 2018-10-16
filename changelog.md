@@ -1,3 +1,12 @@
+1.5.0-beta
+=====================================
+- Breaking changes: main /lib/index.js become /lib/server/index.js
+
+1.4.0-beta
+=====================================
+- Code refactoring
+- Ability use server itself
+
 1.3.1-beta
 =====================================
 - Restore router modules

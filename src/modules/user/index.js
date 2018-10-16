@@ -193,15 +193,25 @@ class UserPayload extends Processor {
           },
         },
       })
-        .then(r => {
-          console.log("signup result", r);
+        .then(user => {
 
-          const user = r;
+          console.log("process.env.APP_SECRET", process.env.APP_SECRET);
+
+          console.log("signup result user", user);
 
           this.data = user;
-          token = jwt.sign({ userId: user.id }, process.env.APP_SECRET)
 
-          return r;
+          const {
+            id: userId,
+          } = user || {}
+
+          if(userId){
+            token = jwt.sign({
+              userId,
+            }, process.env.APP_SECRET)
+          }
+
+          return user;
         })
         .catch(e => {
           console.error("signup error", e);

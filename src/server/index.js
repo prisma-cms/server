@@ -2,21 +2,21 @@
 
 import Mailer from "../plugins/Mailer";
 import sendmailServer from "sendmail";
-import CoreModule from "../modules";
+import CmsModule from "../modules";
 import ImageThumbMiddleware from "../middleware/ImageThumb";
 import { GraphQLServer } from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
 
-const coreModule = new CoreModule({
+const cmsModule = new CmsModule({
 
 });
 
-const resolvers = coreModule.getResolvers();
+const resolvers = cmsModule.getResolvers();
 
 const endpoint = process.env.endpoint;
 
 
-export default function (options = {}) {
+export const startServer = function (options = {}) {
 
 
   let {
@@ -140,3 +140,10 @@ export default function (options = {}) {
 
   return server;
 }
+
+
+export {
+  CmsModule,
+}
+
+export default startServer;
