@@ -6,7 +6,7 @@ const {
   Config,
 } = require("prisma-cli-engine/dist/Config");
 
-const { generateSchema } = require("../../schema");
+// const { generateSchema } = require("../../schema");
 
 
 const {
@@ -87,7 +87,7 @@ const generator = new CustomGenerateFragments({
 const { Environment, PrismaDefinitionClass } = require('prisma-yml')
 
 
-const buildApiSchema = async function () {
+const buildApiSchema = async function (generateSchema) {
 
 
   /**
@@ -110,26 +110,28 @@ const buildApiSchema = async function () {
 }
 
 
-const generatePrismaSchema = async function () {
-  /**
-   * Build schema prisma
-   */
+// const generatePrismaSchema = async function (generateSchema) {
+//   /**
+//    * Build schema prisma
+//    */
 
-  const schema = await generateSchema("prisma");
+//   const schema = await generateSchema("prisma");
 
-
-  return schema;
-
-}
+//   console.log("schema", schema);
 
 
-const deploySchema = async function () {
+//   return schema;
+
+// }
+
+
+const deploySchema = async function (generateSchema) {
 
   const {
     default: prismaDeploy,
   } = require("prisma-cli-core/dist/commands/deploy/deploy");
 
-  const schema = await generatePrismaSchema();
+  const schema = await generateSchema("prisma");
 
   class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
 

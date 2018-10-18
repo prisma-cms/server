@@ -14,8 +14,10 @@ require('@babel/register')({
 
 require("@babel/polyfill");
 
+const { generateSchema } = require("../../schema");
+
 const {
   deploy,
 } = require("./");
 
-deploy();
+deploy(generateSchema);

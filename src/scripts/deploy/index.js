@@ -24,7 +24,7 @@ const {
 // deploy();
 
 
-const deploy = async function () {
+const deploy = async function (generateSchema) {
 
 
   const {
@@ -36,7 +36,7 @@ const deploy = async function () {
   }
 
   // Deploy prisma schema
-  await deploySchema()
+  await deploySchema(generateSchema)
     .then(r => {
 
       // console.log("deploySchema OK");
@@ -52,7 +52,7 @@ const deploy = async function () {
   // console.log("getSchema OK");
 
   // build API schema
-  await buildApiSchema();
+  await buildApiSchema(generateSchema);
   // console.log("buildApiSchema OK");
 
 }

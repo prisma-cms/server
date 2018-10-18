@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.6.0-beta",
+  "version": "1.6.1-beta",
   "description": "",
   "main": "lib/server/index.js",
   "module": "src/server/index.js",

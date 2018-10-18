@@ -13,8 +13,11 @@ require('@babel/register')({
 
 require("@babel/polyfill");
 
-const { 
+
+const { generateSchema } = require("../../schema");
+
+const {
   buildApiSchema,
 } = require("./");
 
-buildApiSchema();
+buildApiSchema(generateSchema);
