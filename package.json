@@ -20,17 +20,8 @@
     "test:watch": "nwb test --server",
     "start": "Sendmail=true action=start-server node src/index.js",
     "start-dev": "Sendmail=true action=start-server nodemon src/index.js",
-    "deploy": "run-s build-schema-prisma && yarn deploy-schema && yarn get-schema -p prisma && yarn build-schema-api",
-    "deploy-force": "run-s build-schema-prisma && yarn deploy-schema -f && yarn get-schema -p prisma && yarn build-schema-api",
-    "deploy-prod": "yarn deploy",
-    "build-schema-prisma": "schemaType=prisma yarn build-schema",
-    "deploy-schema": "node_modules/prisma/dist/index.js deploy",
-    "get-schema": "node_modules/graphql-cli/dist/bin.js get-schema -p prisma -o src/schema/generated/prisma.graphql",
-    "build-schema-api": "schemaType=api run-s build-schema && yarn generate-fragments-api",
-    "build-schema": "action=build-schema node src/index.js",
-    "generate-fragments-api": "graphql generate-fragments --verbose -g=js -p=app -o=src/schema/generated/",
-    "voyager-prisma": "node_modules/graphql-cli/dist/bin.js voyager -p prisma",
-    "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app"
+    "deploy": "NODE_ENV=test node src/scripts/deploy/with-prisma",
+    "build-api": "node src/scripts/deploy/api-only"
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.2-beta",

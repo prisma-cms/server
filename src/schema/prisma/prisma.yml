@@ -1,5 +1,0 @@
-
-{
-  "endpoint": "${env:endpoint}",
-  "datamodel": "generated.graphql"
-}

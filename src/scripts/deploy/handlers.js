@@ -2,7 +2,9 @@ const ora = require('ora');
 
 const chalk = require("chalk");
 
-
+const {
+  Config,
+} = require("prisma-cli-engine/dist/Config");
 
 const {
   default: schemaBuilder,
@@ -28,12 +30,28 @@ class CustomGenerateFragments extends GenerateFragments {
             },
             "generate-fragments": {
               "generator": "js",
-              "output": "src/schema/generated/app.fragments.js"
+              "output": "src/schema/generated/api.fragments.js"
             },
           },
         },
       },
     }
+  }
+
+  async fragments() {
+
+    let result;
+
+    try {
+
+      result = await super.fragments()
+    }
+    catch (error) {
+      this.context.spinner.fail(error);
+    }
+
+    return result;
+
   }
 
 }
@@ -70,15 +88,16 @@ export const buildApiSchema = async function () {
 
   const apiSchema = await schemaBuilder("api");
 
-  // console.log("builded api schema", apiSchema);
 
-
-  console.log("generator", generator);
+  // console.log("generator", generator);
 
   // const fragments = builder.makeFragments(apiSchema);
-  const fragments = generator.handle();
+  const fragments = await generator.handle()
+    .catch(error => {
+      console.error("Error", error);
+    });
 
-  console.log("builded api fragments", fragments);
+  // console.log("builded api fragments", fragments);
 
 }
 
@@ -139,6 +158,23 @@ export const deploySchema = async function () {
 
       super(options);
 
+
+      // console.log(chalk.green("Deploy constructor this.config"), this.config);
+      // console.log(chalk.green("Deploy constructor this.env"), this.env);
+
+      console.log(chalk.green("Deploy constructor this.flags"), this.flags);
+      console.log(chalk.green("Deploy constructor this.argv"), this.argv);
+      console.log(chalk.green("Deploy constructor process.argv"), process.argv);
+      console.log(chalk.green("Deploy constructor this.args"), this.args);
+
+      // console.log(chalk.green("Deploy constructor this.args"), process);
+
+      // this.flags = {
+      //   force: true,
+      // }
+
+      // console.log(chalk.green("Deploy constructor this.flags 2"), this.flags);
+
       this.definition = new CustomPrismaDefinitionClass(
         this.env,
         this.config.definitionPath,
@@ -148,31 +184,78 @@ export const deploySchema = async function () {
 
     }
 
+    // const spinner = ora('Deploy schema');
+
+    async run(props) {
+
+      const spinner = ora('Deploy schema').start();
+
+      // console.log("this.run this", this);
+
+      let promise
+
+      promise = super.run(props);
+
+
+      const result = await promise
+        .catch(error => {
+          spinner.fail(this.out.stderr.output);
+          console.error(chalk.red("promise Error"), error);
+        });
+
+      const {
+        stderr,
+        stdout,
+      } = this.out;
+
+      // if (stderr.output) {
+      //   spinner.fail(stderr.output);
+      // }
+
+      if (stdout.output) {
+        spinner.succeed(stdout.output);
+      }
+
+
+      return result;
+
+    }
+
+
   }
 
 
-  const spinner = ora('Deploy schema').start();
 
-  const result = await Deploy.mock({
-  },
-  )
+  let result;
+
+
+  let mockConfig = new Config();
+
+  Object.assign(mockConfig, {
+    debug: true,
+  });
+
+  // result = await Deploy.mock({
+  //   mockConfig,
+  // },
+  // // ...process.argv,
+  //   // '--force',
+  //   // "true",
+  // )
+
+  let argv = process.argv && process.argv.map(n => n) || [];
+
+  argv.unshift({
+    mockConfig,
+  });
+
+  console.log("mock argv", argv);
+
+  result = await Deploy.mock.apply(Deploy, argv)
     .catch(error => {
-      console.error(chalk.red("Error"), error);
-    })
 
-  const {
-    stderr,
-    stdout,
-  } = result.out;
-
-
-  if (stderr.output.toString()) {
-    spinner.fail(stderr.output);
-  }
-
-  if (stdout.output) {
-    spinner.succeed(stdout.output);
-  }
+      console.error(chalk.red("Error 2"), error);
+    });
 
 }
 
@@ -187,9 +270,9 @@ export const getSchema = async function () {
   const result = await handler({
     spinner: ora('Get schema'),
   }, {
-    endpoint: process.env.endpoint,
-    output: "src/schema/generated/prisma.graphql",
-  });
+      endpoint: process.env.endpoint,
+      output: "src/schema/generated/prisma.graphql",
+    });
 
   return result;
 }

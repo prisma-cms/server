@@ -22,23 +22,24 @@ const {
 } = require("./handlers");
 
 
-const deploy = async function () {
+// const deploy = async function () {
 
-  // Deploy prisma schema
-  await deploySchema();
+//   // Deploy prisma schema
+//   await deploySchema();
 
-  // Downdload prisma schema from endpoint
-  await getSchema();
+//   // Downdload prisma schema from endpoint
+//   await getSchema();
 
-  // build API schema
-  await buildApiSchema();
+//   // build API schema
+//   await buildApiSchema();
 
-}
+// }
 
-deploy();
+// deploy();
 
 
 module.exports = {
-  // default: Builder,
-  // Builder,
+  deploySchema,
+  getSchema,
+  buildApiSchema,
 }

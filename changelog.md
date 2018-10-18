@@ -1,6 +1,23 @@
 1.6.0-beta
 =====================================
 - New schema builder
+- Breaking changes:
+  - Removed prisma.yml
+  - Removed .graphqlconfig
+  - Deprecated npm scripts:
+    - deploy-prod
+    - build-schema-prisma
+    - deploy-schema
+    - get-schema
+    - build-schema-api
+    - build-schema
+    - generate-fragments-api
+    - voyager-prisma
+    - voyager-app
+  - Alternative scripts:
+    - deploy - deploy all schemas with prisma deploy
+    - deploy-force - deploy with force deleting nested data and relations in prisma database
+    - build-api - generate API schema and fragments
 
 1.5.2-beta
 =====================================
