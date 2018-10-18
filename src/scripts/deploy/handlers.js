@@ -1,32 +1,12 @@
-
-require('@babel/register')({
-  extensions: ['.js'],
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ],
-  "plugins": [
-    "transform-es2015-modules-commonjs",
-    "@babel/plugin-proposal-class-properties"
-  ],
-
-});
-
-require("@babel/polyfill");
-
 const ora = require('ora');
 
 const chalk = require("chalk");
 
 
-const {
-  default: prismaDeploy,
-} = require("prisma-cli-core/dist/commands/deploy/deploy");
-
 
 const {
   default: schemaBuilder,
-} = require("../schema");
+} = require("../../schema");
 
 
 const {
@@ -81,7 +61,7 @@ const generator = new CustomGenerateFragments({
 const { Environment, PrismaDefinitionClass } = require('prisma-yml')
 
 
-const buildApiSchema = async function () {
+export const buildApiSchema = async function () {
 
 
   /**
@@ -116,7 +96,11 @@ const generateSchema = async function () {
 }
 
 
-const deploySchema = async function () {
+export const deploySchema = async function () {
+
+  const {
+    default: prismaDeploy,
+  } = require("prisma-cli-core/dist/commands/deploy/deploy");
 
   const schema = await generateSchema();
 
@@ -193,7 +177,7 @@ const deploySchema = async function () {
 }
 
 
-const getSchema = async function () {
+export const getSchema = async function () {
 
   const {
     handler,
@@ -208,26 +192,4 @@ const getSchema = async function () {
   });
 
   return result;
-}
-
-
-const deploy = async function () {
-
-  // Deploy prisma schema
-  await deploySchema();
-
-  // Downdload prisma schema from endpoint
-  await getSchema();
-
-  // build API schema
-  await buildApiSchema();
-
-}
-
-deploy();
-
-
-module.exports = {
-  // default: Builder,
-  // Builder,
 }
