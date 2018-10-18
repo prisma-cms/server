@@ -63,18 +63,15 @@ class CmsModule extends PrismaModule {
   getApiSchema(types = []) {
 
 
-    let baseSchema = fs.readFileSync("src/schema/generated/prisma.graphql", "utf-8");
+    let baseSchema = [];
 
-    
+    let schemaFile = "src/schema/generated/prisma.graphql";
 
+    if (fs.existsSync(schemaFile)) {
+      baseSchema = fs.readFileSync(schemaFile, "utf-8");
+    }
 
-
-    // let apiSchema = super.getApiSchema(types.concat(baseSchema), ["UserCreateInput"]);
     let apiSchema = super.getApiSchema(types.concat(baseSchema), []);
-
-    // if (schema) {
-    //   types = types.concat(schema);
-    // }
 
     let schema = fileLoader(__dirname + '/schema/api/', {
       recursive: true,

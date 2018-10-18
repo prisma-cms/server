@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.5.1-beta",
+  "version": "1.6.0-beta",
   "description": "",
   "main": "lib/server/index.js",
   "module": "src/server/index.js",
@@ -14,7 +14,7 @@
     "build": "nwb build-web-module --copy-files",
     "clean": "nwb clean-module",
     "prepublishOnly": "npm run build",
-    "test": "node tests/server",
+    "test": "react-scripts test",
     "test-nwb": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
@@ -26,8 +26,9 @@
     "build-schema-prisma": "schemaType=prisma yarn build-schema",
     "deploy-schema": "node_modules/prisma/dist/index.js deploy",
     "get-schema": "node_modules/graphql-cli/dist/bin.js get-schema -p prisma -o src/schema/generated/prisma.graphql",
-    "build-schema-api": "schemaType=api yarn build-schema",
+    "build-schema-api": "schemaType=api run-s build-schema && yarn generate-fragments-api",
     "build-schema": "action=build-schema node src/index.js",
+    "generate-fragments-api": "graphql generate-fragments --verbose -g=js -p=app -o=src/schema/generated/",
     "voyager-prisma": "node_modules/graphql-cli/dist/bin.js voyager -p prisma",
     "voyager-app": "node_modules/graphql-cli/dist/bin.js voyager -p app"
   },
@@ -52,7 +53,7 @@
     "module": "^1.2.5",
     "mysql": "^2.16.0",
     "net": "^1.0.2",
-    "prisma": "^1.16.0",
+    "prisma": "^1.18.1",
     "prisma-binding": "^2.1.5",
     "promises-all": "^1.0.0",
     "random-useragent": "^0.3.1",
@@ -80,8 +81,10 @@
     "graphql-cli-generate-fragments": "^1.4.1",
     "mssql": "^4.2.1",
     "nwb": "0.23.x",
+    "ora": "^3.0.0",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "react-scripts": "^2.0.5"
   },
   "author": "Fi1osof",
   "license": "MIT",

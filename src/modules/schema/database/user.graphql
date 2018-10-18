@@ -31,6 +31,13 @@ type User{
   CreatedBy: User @relation(name: "UserCreatedBy", onDelete: SET_NULL) 
 
   LogedIns: [LogedIn!]! @relation (name: "UserLogedIn")
+
+  test: String
+  test2: String
+  test3: String
+  test4: String
+  test5: String
+  test6: String
 }
  
 
