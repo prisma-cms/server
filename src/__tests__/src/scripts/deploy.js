@@ -53,10 +53,25 @@ describe("Deploy scripts", () => {
   })
 
 
+
+  it("Deploy buildApiSchema", () => {
+
+    let result;
+
+    result = buildApiSchema();
+
+    // expect(await result.then(n => n).catch(error => error)).toBe(true);
+
+    expect(result instanceof Promise).toBe(true);
+
+
+  })
+
+
 })
 
 
-const deploySchemaTest = async function(){
+const deploySchemaTest = async function () {
 
   await deploySchema();
 

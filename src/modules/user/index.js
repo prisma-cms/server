@@ -53,6 +53,8 @@ class UserPayload extends Processor {
   async signin(source, args, ctx, info) {
 
 
+    console.log(chalk.green("User signin ctx"), ctx);
+
     console.log(chalk.green("User signin args"), args);
 
     const {
@@ -73,6 +75,8 @@ class UserPayload extends Processor {
 
     console.log(chalk.green("User signin password"), password);
     console.log(chalk.green("User signin user.password"), user && user.password);
+
+    console.log(chalk.green("User signin user"), user);
 
     if (!user) {
       this.addFieldError("username", "Пользователь не был найден");
@@ -537,31 +541,19 @@ const usersConnection = async function (parent, args, ctx, info) {
 
 }
 
-const users = async function (parent, args, ctx, info) {
+const users = function (parent, args, ctx, info) {
 
-  let users = await ctx.db.query.users({}, info);
+  return ctx.db.query.users({}, info);
 
-  return users ? users.map(n => ({
-    ...n,
-  })) : null;
 }
 
 const user = async function (parent, args, ctx, info) {
 
-  const user = await ctx.db.query.user({
-
+  console.log(chalk.green("user args"), args);
+  
+  return ctx.db.query.user({
+    
   }, info);
-
-  if (user) {
-
-    return {
-      ...user,
-    };
-
-  }
-  else {
-    return null;
-  }
 }
 
 

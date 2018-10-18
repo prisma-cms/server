@@ -6,9 +6,7 @@ const {
   Config,
 } = require("prisma-cli-engine/dist/Config");
 
-const {
-  default: schemaBuilder,
-} = require("../../schema");
+const { generateSchema } = require("../../schema");
 
 
 const {
@@ -53,6 +51,16 @@ class CustomGenerateFragments extends GenerateFragments {
     return result;
 
   }
+  
+  // processFragments(schemaPath){
+
+  //   schemaPath = "src/schema/generated/api.graphql";
+    
+  //   let result = super.processFragments(schemaPath);
+    
+  //   return result;
+    
+  // }
 
 }
 
@@ -60,12 +68,12 @@ const generator = new CustomGenerateFragments({
   spinner: ora('Generate fragments'),
   getConfig: (props) => {
 
-    console.log(chalk.green("getConfig props"), props);
+    // console.log(chalk.green("getConfig props"), props);
 
     return {
       getProjectConfig: (props) => {
 
-        console.log(chalk.green("getProjectConfig props"), props);
+        // console.log(chalk.green("getProjectConfig props"), props);
       },
     };
   },
@@ -79,17 +87,17 @@ const generator = new CustomGenerateFragments({
 const { Environment, PrismaDefinitionClass } = require('prisma-yml')
 
 
-export const buildApiSchema = async function () {
+const buildApiSchema = async function () {
 
 
   /**
    * Build api schema
    */
 
-  const apiSchema = await schemaBuilder("api");
+  const apiSchema = await generateSchema("api");
 
 
-  // console.log("generator", generator);
+  // console.log("apiSchema", apiSchema);
 
   // const fragments = builder.makeFragments(apiSchema);
   const fragments = await generator.handle()
@@ -102,12 +110,12 @@ export const buildApiSchema = async function () {
 }
 
 
-const generateSchema = async function () {
+const generatePrismaSchema = async function () {
   /**
    * Build schema prisma
    */
 
-  const schema = await schemaBuilder("prisma");
+  const schema = await generateSchema("prisma");
 
 
   return schema;
@@ -115,13 +123,13 @@ const generateSchema = async function () {
 }
 
 
-export const deploySchema = async function () {
+const deploySchema = async function () {
 
   const {
     default: prismaDeploy,
   } = require("prisma-cli-core/dist/commands/deploy/deploy");
 
-  const schema = await generateSchema();
+  const schema = await generatePrismaSchema();
 
   class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
 
@@ -162,10 +170,10 @@ export const deploySchema = async function () {
       // console.log(chalk.green("Deploy constructor this.config"), this.config);
       // console.log(chalk.green("Deploy constructor this.env"), this.env);
 
-      console.log(chalk.green("Deploy constructor this.flags"), this.flags);
-      console.log(chalk.green("Deploy constructor this.argv"), this.argv);
-      console.log(chalk.green("Deploy constructor process.argv"), process.argv);
-      console.log(chalk.green("Deploy constructor this.args"), this.args);
+      // console.log(chalk.green("Deploy constructor this.flags"), this.flags);
+      // console.log(chalk.green("Deploy constructor this.argv"), this.argv);
+      // console.log(chalk.green("Deploy constructor process.argv"), process.argv);
+      // console.log(chalk.green("Deploy constructor this.args"), this.args);
 
       // console.log(chalk.green("Deploy constructor this.args"), process);
 
@@ -249,7 +257,7 @@ export const deploySchema = async function () {
     mockConfig,
   });
 
-  console.log("mock argv", argv);
+  // console.log("mock argv", argv);
 
   result = await Deploy.mock.apply(Deploy, argv)
     .catch(error => {
@@ -260,7 +268,7 @@ export const deploySchema = async function () {
 }
 
 
-export const getSchema = async function () {
+const getSchema = async function () {
 
   const {
     handler,
@@ -275,4 +283,10 @@ export const getSchema = async function () {
     });
 
   return result;
+}
+
+module.exports = {
+  buildApiSchema,
+  deploySchema,
+  getSchema,
 }

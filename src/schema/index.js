@@ -1,10 +1,12 @@
 
-import generateSchema from "@prisma-cms/prisma-schema";
+import prismaGenerateSchema from "@prisma-cms/prisma-schema";
 
 import CoreModule from "../modules";
 
 
-export default function(schemaType){
+export const generateSchema = function(schemaType){
 
-  return generateSchema(schemaType, new CoreModule(), __dirname);
+  return prismaGenerateSchema(schemaType, new CoreModule(), __dirname);
 }
+
+export default generateSchema;

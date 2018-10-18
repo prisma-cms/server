@@ -53,6 +53,12 @@ describe("Main Module", () => {
       const fragment = fragments[name];
       expect(fragment).toContain("fragment");
     });
+    
+    const {
+      UserNoNestingFragment,
+    } = fragments;
+
+    expect(UserNoNestingFragment).toNotContain("LogedIns");
 
   })
 

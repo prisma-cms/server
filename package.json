@@ -27,7 +27,7 @@
     "@prisma-cms/prisma-context": "^1.0.2-beta",
     "@prisma-cms/prisma-module": "^1.0.3-beta",
     "@prisma-cms/prisma-processor": "^1.0.2-beta",
-    "@prisma-cms/prisma-schema": "^1.0.2-beta",
+    "@prisma-cms/prisma-schema": "^1.0.3-beta",
     "@prisma-cms/prisma-uploads": "^1.1.0-beta",
     "@prisma-cms/router": "^1.0.1",
     "bcryptjs": "^2.4.3",
@@ -95,5 +95,11 @@
   "bugs": {
     "url": "https://github.com/prisma-cms/server/issues"
   },
-  "homepage": "https://github.com/prisma-cms/server#readme"
+  "homepage": "https://github.com/prisma-cms/server#readme",
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "/node_modules/",
+      "/src/schema/"
+    ]
+  }
 }

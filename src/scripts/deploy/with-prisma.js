@@ -1,43 +1,21 @@
 
+require('@babel/register')({
+  extensions: ['.js'],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "transform-es2015-modules-commonjs",
+    "@babel/plugin-proposal-class-properties"
+  ],
+
+});
+
+require("@babel/polyfill");
+
 const {
-  deploySchema,
-  getSchema,
-  buildApiSchema,
+  deploy,
 } = require("./");
 
-
-const {
-  endpoint,
-} = process.env;
-
-if (!endpoint) {
-  throw new Error("Environment endpoint required");
-}
-
-const deploy = async function () {
-
-  // Deploy prisma schema
-  await deploySchema()
-    .then(r => {
-
-      // console.log("deploySchema OK");
-      return r;
-    })
-    .catch(error => {
-      
-      // console.error("deploySchema Error");
-    });
-
-  // Downdload prisma schema from endpoint
-  await getSchema();
-  // console.log("getSchema OK");
-
-  // build API schema
-  await buildApiSchema();
-  // console.log("buildApiSchema OK");
-
-}
-
 deploy();
-
-console.log("End");
