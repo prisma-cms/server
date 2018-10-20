@@ -1,3 +1,7 @@
+1.6.5-beta
+=====================================
+- Upgrade @prisma-cms/prisma-uploads
+
 1.6.4-beta
 =====================================
 - Upgrade @prisma-cms/prisma-context

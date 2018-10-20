@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.6.4-beta",
+  "version": "1.6.5-beta",
   "description": "",
   "main": "lib/server/index.js",
   "module": "es/server/index.js",
@@ -28,7 +28,7 @@
     "@prisma-cms/prisma-module": "^1.0.3-beta",
     "@prisma-cms/prisma-processor": "^1.0.2-beta",
     "@prisma-cms/prisma-schema": "^1.0.3-beta",
-    "@prisma-cms/prisma-uploads": "^1.1.0-beta",
+    "@prisma-cms/prisma-uploads": "^1.1.2-beta",
     "@prisma-cms/router": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "chalk": "^2.4.1",
