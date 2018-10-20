@@ -1,3 +1,7 @@
+1.6.4-beta
+=====================================
+- Upgrade @prisma-cms/prisma-context
+
 1.6.3-beta
 =====================================
 - Fix dependencies

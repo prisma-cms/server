@@ -1,9 +1,9 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.6.3-beta",
+  "version": "1.6.4-beta",
   "description": "",
   "main": "lib/server/index.js",
-  "module": "src/server/index.js",
+  "module": "es/server/index.js",
   "files": [
     "src",
     "es",
@@ -24,14 +24,12 @@
     "build-api": "node src/scripts/deploy/api-only"
   },
   "dependencies": {
-    "@prisma-cms/prisma-context": "^1.0.3-beta",
+    "@prisma-cms/prisma-context": "^1.0.4-beta",
     "@prisma-cms/prisma-module": "^1.0.3-beta",
     "@prisma-cms/prisma-processor": "^1.0.2-beta",
     "@prisma-cms/prisma-schema": "^1.0.3-beta",
     "@prisma-cms/prisma-uploads": "^1.1.0-beta",
     "@prisma-cms/router": "^1.0.2",
-    "sendmail": "^1.4.1",
-    "sharp": "0.21.0",
     "bcryptjs": "^2.4.3",
     "chalk": "^2.4.1",
     "dns": "^0.2.2",
@@ -53,13 +51,15 @@
     "nwb": "0.23.x",
     "ora": "^3.0.0",
     "prisma": "^1.18.1",
-    "prisma-binding": "^2.1.5",
+    "prisma-binding": "^2.1.6",
     "promises-all": "^1.0.0",
     "random-useragent": "^0.3.1",
     "react": "^16.5.2",
     "react-cms-graphql-utils": "^1.1.0",
     "react-dom": "^16.5.2",
     "react-scripts": "^2.0.5",
+    "sendmail": "^1.4.1",
+    "sharp": "0.21.0",
     "shortid": "^2.2.13",
     "urijs": "^1.19.1"
   },
@@ -77,6 +77,10 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.26.0",
     "graphql": "^14.0.2"
+  },
+  "resolutions": {
+    "graphql": "14.0.2",
+    "prisma-binding": "^2.1.6"
   },
   "author": "Fi1osof",
   "license": "MIT",
