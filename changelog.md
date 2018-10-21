@@ -1,3 +1,12 @@
+1.6.6-beta
+=====================================
+- Added tests
+- Added -D apollo-client
+- Upgrade 
+  - @prisma-cms/prisma-processor
+  - @prisma-cms/prisma-module
+  - graphql-import
+
 1.6.5-beta
 =====================================
 - Upgrade @prisma-cms/prisma-uploads
