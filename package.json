@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.6.6-beta",
+  "version": "1.6.7-beta",
   "description": "",
   "main": "lib/server/index.js",
   "module": "es/server/index.js",
@@ -24,7 +24,7 @@
     "build-api": "node src/scripts/deploy/api-only"
   },
   "dependencies": {
-    "@prisma-cms/prisma-context": "^1.0.4-beta",
+    "@prisma-cms/prisma-context": "^1.0.5-beta",
     "@prisma-cms/prisma-module": "^1.1.0-beta",
     "@prisma-cms/prisma-processor": "^1.0.3-beta",
     "@prisma-cms/prisma-schema": "^1.0.3-beta",

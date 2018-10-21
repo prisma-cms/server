@@ -1,3 +1,7 @@
+1.6.7-beta
+=====================================
+- Upgrade @prisma-cms/prisma-context
+
 1.6.6-beta
 =====================================
 - Added tests
