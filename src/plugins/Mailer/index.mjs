@@ -1,24 +1,10 @@
 
 import Payload from "@prisma-cms/prisma-processor";
 
-// const nodemailer = require('nodemailer');
-
-// create reusable transporter object using the default SMTP transport
-// let transporter = nodemailer.createTransport({
-//   sendmail: true,
-//   // host: smtp_config.host,
-//   // port: smtp_config.port,
-//   // secure: true, // true for 465, false for other ports
-//   // auth: {
-//   //     user: smtp_config.user, // generated ethereal user
-//   //     pass: smtp_config.password,  // generated ethereal password
-//   // }
-// });
-
 
 class Mailer extends Payload {
 
-  objectType = "Letter";
+
 
   constructor(props) {
 
@@ -28,10 +14,14 @@ class Mailer extends Payload {
 
     super(ctx);
 
+    this.objectType = "Letter";
+
+    this.sendEmail = (to, subject, message) => this.sendEmail(to, subject, message)
+
   }
 
 
-  getConfig(){
+  getConfig() {
 
     const {
       sendmail,
@@ -71,14 +61,20 @@ class Mailer extends Payload {
       delay,
     } = this.getConfig();
 
-    const letter = (await db.query.letters({
+
+    const letters = await db.query.letters({
       first: 1,
       where: {
         status: "Created",
       },
-    }))[0];
+    });
 
-    console.log("sendLetters letter", letter);
+
+    // console.log("sendLetters letters", letters);
+
+    const letter = letters && letters[0];
+
+    // console.log("sendLetters letter", letter);
 
     if (letter) {
       this.sendLetter(letter);
@@ -145,16 +141,7 @@ class Mailer extends Payload {
 
 
 
-  sendEmail = async (to, subject, message) => {
-
-
-    // let simplesmtp = require("simplesmtp");
-
-    // simplesmtp.connect(port[,host][, options]);
-
-
-    // console.log("this.config", this.config);
-    // console.log("stmp config", smtp_config);
+  sendEmail(to, subject, message) {
 
     const {
       sendmail,
@@ -174,13 +161,13 @@ class Mailer extends Payload {
         html: `${message}
         <hr />
         ${footer}`,
-      }, function(err, reply) {
+      }, function (err, reply) {
         // console.log(err && err.stack);
         // console.dir(reply);
-        if(err){
+        if (err) {
           reject(err);
         }
-        else{
+        else {
           resolve(true);
         }
       });
@@ -188,7 +175,7 @@ class Mailer extends Payload {
     });
 
 
- 
+
 
   }
 

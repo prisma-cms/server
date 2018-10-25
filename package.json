@@ -1,9 +1,9 @@
 {
   "name": "@prisma-cms/server",
-  "version": "1.6.7-beta",
+  "version": "2.0.0-beta",
   "description": "",
-  "main": "lib/server/index.js",
-  "module": "es/server/index.js",
+  "main": "lib/server/index",
+  "module": "es/server/index",
   "files": [
     "src",
     "es",
@@ -18,10 +18,10 @@
     "test-nwb": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
-    "start": "Sendmail=true action=start-server node src/index.js",
-    "start-dev": "Sendmail=true action=start-server nodemon src/index.js",
-    "deploy": "NODE_ENV=test node src/scripts/deploy/with-prisma",
-    "build-api": "node src/scripts/deploy/api-only"
+    "start": "Sendmail=true action=start-server node --experimental-modules src/index",
+    "start-dev": "Sendmail=true action=start-server nodemon --experimental-modules src/index",
+    "deploy": "NODE_ENV=test node --experimental-modules src/scripts/deploy/with-prisma",
+    "build-api": "node --experimental-modules src/scripts/deploy/api-only"
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.5-beta",
@@ -44,19 +44,15 @@
     "knex": "^0.15.2",
     "md5": "^2.2.1",
     "merge-graphql-schemas": "^1.5.3",
-    "module": "^1.2.5",
-    "mssql": "^4.2.1",
     "mysql": "^2.16.0",
     "net": "^1.0.2",
     "nwb": "0.23.x",
     "ora": "^3.0.0",
-    "prisma": "^1.18.1",
+    "prisma": "^1.19.0",
     "prisma-binding": "^2.1.6",
-    "promises-all": "^1.0.0",
-    "random-useragent": "^0.3.1",
-    "react": "^16.5.2",
+    "react": "^16.6.0",
     "react-cms-graphql-utils": "^1.1.0",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.6.0",
     "react-scripts": "^2.0.5",
     "sendmail": "^1.4.1",
     "sharp": "0.21.0",
@@ -69,7 +65,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
-    "apollo-client": "^2.4.2",
+    "apollo-client": "^2.4.3",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-runtime": "^6.12.0",
@@ -78,6 +74,9 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.26.0",
     "graphql": "^14.0.2"
+  },
+  "engines": {
+    "node": ">=10.x"
   },
   "resolutions": {
     "graphql": "14.0.2",

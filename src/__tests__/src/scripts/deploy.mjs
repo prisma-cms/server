@@ -1,13 +1,13 @@
 
 import expect from "expect";
 
-const chalk = require("chalk");
+import chalk from "chalk";
 
-const {
+import  {
   deploySchema,
   getSchema,
   buildApiSchema,
-} = require("../../../scripts/deploy/handlers");
+} from "../../../scripts/deploy/handlers";
 
 
 describe("Deploy scripts", () => {

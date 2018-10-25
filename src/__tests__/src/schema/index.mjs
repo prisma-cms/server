@@ -1,12 +1,12 @@
 
 import expect from "expect";
 
-const chalk = require("chalk");
+import chalk from "chalk";
+ 
 
-const {
-  default: generateSchema,
-} = require("../../../schema");
+import generateSchema from "../../../schema";
 
+import * as fragments from "../../../schema/generated/api.fragments.js";
 
 describe("Main Module", () => {
 
@@ -37,8 +37,7 @@ describe("Main Module", () => {
 
 
   it("Check API fragments", () => {
-
-    const fragments = require("../../../schema/generated/api.fragments.js");
+ 
 
     const requiredFragments = [
       "RouteFragment",

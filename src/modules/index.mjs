@@ -6,13 +6,21 @@ import chalk from "chalk";
 import PrismaModule from "@prisma-cms/prisma-module";
 import RouterModule from "@prisma-cms/router";
 
-import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import MergeSchema from 'merge-graphql-schemas';
 
 import { parse } from "graphql";
 
 import UsersModule from "./user";
 import FilesModule from "./Files";
+import LettersModule from "./letters";
 
+import path from 'path';
+
+const moduleURL = new URL(import.meta.url);
+
+const __dirname = path.dirname(moduleURL.pathname);
+
+const { fileLoader, mergeTypes } = MergeSchema;
 
 class CmsModule extends PrismaModule {
 
@@ -27,6 +35,7 @@ class CmsModule extends PrismaModule {
       UsersModule,
       FilesModule,
       RouterModule,
+      LettersModule,
     ]);
 
     Object.assign(options, {

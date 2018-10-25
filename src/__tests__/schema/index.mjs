@@ -6,7 +6,7 @@ import chalk from "chalk";
 
 import TestModule from "../../modules";
 
-const { parse, print } = require('graphql');
+import { parse } from 'graphql';
 
 const module = new TestModule();
 
@@ -134,7 +134,7 @@ describe('Get prisma Schema', () => {
     let requiredFields = [...new Set(both.concat(prisma))]
 
 
-    if(!requiredFields.length){
+    if (!requiredFields.length) {
       return;
     }
 
@@ -239,8 +239,8 @@ describe('Get API Schema', () => {
 
     let requiredFields = [...new Set(both.concat(api))]
 
-    
-    if(!requiredFields.length){
+
+    if (!requiredFields.length) {
       return;
     }
 

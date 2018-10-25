@@ -3,9 +3,21 @@
 import Mailer from "../plugins/Mailer";
 import sendmailServer from "sendmail";
 import CmsModule from "../modules";
-import ImageThumbMiddleware from "../middleware/ImageThumb";
-import { GraphQLServer } from "graphql-yoga";
+// import { GraphQLServer } from "graphql-yoga";
+import graphqlYoga from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
+
+import Knex from "knex";
+
+import ImageThumbMiddleware from "../middleware/ImageThumb";
+
+const {
+  GraphQLServer,
+} = graphqlYoga;
+
+// console.log("GraphQLServer", GraphQLServer);
+
+// console.log("ImageThumbMiddleware", ImageThumbMiddleware);
 
 const cmsModule = new CmsModule({
 
@@ -81,7 +93,7 @@ export const startServer = function (options = {}) {
     ...knexOptions,
   }
 
-  const knex = require("knex")(knexOptions);
+  const knex = Knex(knexOptions);
 
 
   contextOptions = {

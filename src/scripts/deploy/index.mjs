@@ -1,27 +1,11 @@
 
 
 
-const {
+import {
   deploySchema,
   getSchema,
   buildApiSchema,
-} = require("./handlers");
-
-
-// const deploy = async function () {
-
-//   // Deploy prisma schema
-//   await deploySchema();
-
-//   // Downdload prisma schema from endpoint
-//   await getSchema();
-
-//   // build API schema
-//   await buildApiSchema();
-
-// }
-
-// deploy();
+} from "./handlers";
 
 
 const deploy = async function (generateSchema) {
@@ -47,6 +31,8 @@ const deploy = async function (generateSchema) {
       // console.error("deploySchema Error");
     });
 
+  return;
+
   // Downdload prisma schema from endpoint
   await getSchema();
   // console.log("getSchema OK");
@@ -58,7 +44,7 @@ const deploy = async function (generateSchema) {
 }
 
 
-module.exports = {
+export {
   deploySchema,
   getSchema,
   buildApiSchema,

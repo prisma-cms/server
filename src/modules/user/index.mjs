@@ -3,16 +3,14 @@
 import Processor from "@prisma-cms/prisma-processor";
 
 import shortid from "shortid";
-import chalk from "chalk";
-
-import moment from "moment";
 
 import PrismaModule from "@prisma-cms/prisma-module";
 
-const isemail = require("isemail");
+import isemail from "isemail";
 
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+import bcrypt from "bcryptjs";
+ 
+import jwt from "jsonwebtoken";
 
 
 const cleanUpPhone = function (phone) {
@@ -46,16 +44,18 @@ const createPassword = async (password) => {
 
 
 class UserPayload extends Processor {
+ 
 
-  objectType = "User";
+  constructor(ctx) {
 
+    super(ctx);
+
+    this.objectType = "User";
+
+  }
 
   async signin(source, args, ctx, info) {
 
-
-    console.log(chalk.green("User signin ctx"), ctx);
-
-    console.log(chalk.green("User signin args"), args);
 
     const {
       where,
@@ -72,11 +72,6 @@ class UserPayload extends Processor {
       where,
     });
 
-
-    console.log(chalk.green("User signin password"), password);
-    console.log(chalk.green("User signin user.password"), user && user.password);
-
-    console.log(chalk.green("User signin user"), user);
 
     if (!user) {
       this.addFieldError("username", "Пользователь не был найден");
@@ -199,17 +194,13 @@ class UserPayload extends Processor {
       })
         .then(user => {
 
-          console.log("process.env.APP_SECRET", process.env.APP_SECRET);
-
-          console.log("signup result user", user);
-
           this.data = user;
 
           const {
             id: userId,
           } = user || {}
 
-          if(userId){
+          if (userId) {
             token = jwt.sign({
               userId,
             }, process.env.APP_SECRET)
@@ -520,7 +511,6 @@ const usersConnection = async function (parent, args, ctx, info) {
 
     let phoneField = OR.find(n => Object.keys(n).indexOf("phone") !== -1);
 
-    // console.log(chalk.green("phoneField"), phoneField);
 
     if (phoneField && phoneField.phone) {
       phoneField.phone = cleanUpPhone(phoneField.phone);
@@ -549,10 +539,9 @@ const users = function (parent, args, ctx, info) {
 
 const user = async function (parent, args, ctx, info) {
 
-  console.log(chalk.green("user args"), args);
-  
+
   return ctx.db.query.user({
-    
+
   }, info);
 }
 
@@ -637,7 +626,6 @@ const resetPassword = async function (source, args, ctx, info) {
 
 
   if (result) {
-    console.log(chalk.green("resetPassword result"), result);
   }
   else {
     throw (new Error("Ошибка сброса пароля"));

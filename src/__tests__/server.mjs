@@ -2,9 +2,9 @@
 
 // const basepath = process.cwd();
 
-// require('@babel/polyfill');
 
-// require('@babel/register')({
+
+
 //   extensions: ['.js'],
 //   // presets: ['react', "es2015"],
 //   // presets: ["es2015"],
@@ -41,13 +41,13 @@
 
 import expect from "expect";
 
-const chalk = require("chalk");
-
-const {
+import chalk from "chalk";
+ 
+import {
+  default as defaultStartServer,
   CmsModule,
   startServer,
-  default: defaultStartServer,
-} = require("../server");
+} from "../server"
 
 
 describe("Server", () => {

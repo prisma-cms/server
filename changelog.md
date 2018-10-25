@@ -1,3 +1,7 @@
+2.0.0
+=====================================
+- Global code refactoring. Move to .mjs
+
 1.6.7-beta
 =====================================
 - Upgrade @prisma-cms/prisma-context

@@ -2,7 +2,7 @@
 
 // const cwd = process.cwd();
 
-// require("babel-register")({
+
 //   ignore: function (filename) {
 
 //     const relativePath = filename.replace(cwd, "");
@@ -14,27 +14,36 @@
 
 // const cwd = process.cwd();
 
-require('@babel/register')({
-  extensions: ['.js'],
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ],
-  "plugins": [
-    "transform-es2015-modules-commonjs",
-    "@babel/plugin-proposal-class-properties"
-  ],
 
-  // ignore: [function (filename) {
+//   extensions: ['.js'],
+//   "presets": [
+//     "@babel/preset-env",
+//     "@babel/preset-react"
+//   ],
+//   "plugins": [
+//     "transform-es2015-modules-commonjs",
+//     "@babel/plugin-proposal-class-properties"
+//   ],
 
-  //   return filename.indexOf(cwd + `/node_modules/`) === 0;
-  // }],
-});
+//   // ignore: [function (filename) {
 
-require("@babel/polyfill");
+//   //   return filename.indexOf(cwd + `/node_modules/`) === 0;
+//   // }],
+// });
 
 
-const CmsModule = require("./server").CmsModule;
+
+import startServer, {
+  CmsModule,
+} from "./server";
+
+import generateSchema from "./schema";
+
+// console.log("startServer", startServer);
+
+// const {
+// } = startServer;
+
 const cmsModule = new CmsModule({
 });
 const resolvers = cmsModule.getResolvers();
@@ -44,14 +53,12 @@ switch (process.env.action) {
 
   case "build-schema":
 
-    require("./schema").default(process.env.schemaType);
+    generateSchema(process.env.schemaType);
 
     break;
 
   case "start-server":
 
-
-    const startServer = require("./server").default;
 
     startServer({
       // typeDefs: 'src/server/schema/generated/api.graphql',
@@ -78,20 +85,20 @@ switch (process.env.action) {
 //   switch (action) {
 
 //     case "build-schema":
-  
-//       require("./schema")(schemaType);
-  
+
+
+
 //       break;
-  
+
 //     case "start-server":
-  
-  
-//       require("./server");
-  
+
+
+
+
 //       break;
-  
+
 //     default: throw (new Error("action env not defined"))
-  
+
 //   }
 
 // }

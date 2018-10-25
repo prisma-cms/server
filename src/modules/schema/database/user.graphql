@@ -20,7 +20,9 @@ type User{
   sudo: Boolean @default(value: false)
   active: Boolean @default(value: true)
 
-  # Признак того, что пришел пользователь и активировал свою анкету
+  """
+  Признак того, что пришел пользователь и активировал свою анкету
+  """
   activated: Boolean @default(value: false)
 
   deleted: Boolean @default(value: false)

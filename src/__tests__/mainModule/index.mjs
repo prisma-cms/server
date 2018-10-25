@@ -1,11 +1,12 @@
 
 import expect from "expect";
 
-const chalk = require("chalk");
+import chalk from "chalk";
+ 
 
-const {
+import {
   CmsModule,
-} = require("../../server");
+} from "../../server"
 
 
 describe("Main Module", () => {

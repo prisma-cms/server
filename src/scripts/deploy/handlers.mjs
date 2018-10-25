@@ -1,19 +1,47 @@
-const ora = require('ora');
 
-const chalk = require("chalk");
+import ora from "ora";
+
+import chalk from "chalk";
+
+import PrismaEngine from "prisma-cli-engine";
+
+
+import GenerateFragmentsHandler from "graphql-cli-generate-fragments/dist/GenerateFragments";
+
+import PrismaYml from 'prisma-yml'
+
+
+// import prismaDeploy from "prisma-cli-core/dist/commands/deploy/deploy";
+import PrismaCliCore from "prisma-cli-core";
+
+import GetSchema from "graphql-cli/dist/cmds/get-schema";
+
+const {
+  PrismaDefinitionClass,
+} = PrismaYml;
+
+const {
+  handler,
+} = GetSchema;
 
 const {
   Config,
-} = require("prisma-cli-engine/dist/Config");
-
-// const { generateSchema } = require("../../schema");
-
+} = PrismaEngine
 
 const {
   GenerateFragments,
-} = require("graphql-cli-generate-fragments/dist/GenerateFragments");
+} = GenerateFragmentsHandler;
 
+const {
+  Deploy: prismaDeploy,
+} = PrismaCliCore;
+
+// console.log("PrismaDefinitionClass", PrismaDefinitionClass);
+// console.log("handler", handler);
+// console.log("Config", Config);
 // console.log("GenerateFragments", GenerateFragments);
+// console.log("prismaDeploy", typeof prismaDeploy, prismaDeploy);
+// console.log("Deploy", typeof Deploy, Deploy);
 
 class CustomGenerateFragments extends GenerateFragments {
 
@@ -51,16 +79,7 @@ class CustomGenerateFragments extends GenerateFragments {
     return result;
 
   }
-  
-  // processFragments(schemaPath){
 
-  //   schemaPath = "src/schema/generated/api.graphql";
-    
-  //   let result = super.processFragments(schemaPath);
-    
-  //   return result;
-    
-  // }
 
 }
 
@@ -68,12 +87,10 @@ const generator = new CustomGenerateFragments({
   spinner: ora('Generate fragments'),
   getConfig: (props) => {
 
-    // console.log(chalk.green("getConfig props"), props);
 
     return {
       getProjectConfig: (props) => {
 
-        // console.log(chalk.green("getProjectConfig props"), props);
       },
     };
   },
@@ -84,7 +101,6 @@ const generator = new CustomGenerateFragments({
 
 
 
-const { Environment, PrismaDefinitionClass } = require('prisma-yml')
 
 
 const buildApiSchema = async function (generateSchema) {
@@ -110,28 +126,16 @@ const buildApiSchema = async function (generateSchema) {
 }
 
 
-// const generatePrismaSchema = async function (generateSchema) {
-//   /**
-//    * Build schema prisma
-//    */
-
-//   const schema = await generateSchema("prisma");
-
-//   console.log("schema", schema);
-
-
-//   return schema;
-
-// }
 
 
 const deploySchema = async function (generateSchema) {
 
-  const {
-    default: prismaDeploy,
-  } = require("prisma-cli-core/dist/commands/deploy/deploy");
 
   const schema = await generateSchema("prisma");
+
+  // console.log("schema", schema);
+
+  // return;
 
   class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
 
@@ -169,21 +173,6 @@ const deploySchema = async function (generateSchema) {
       super(options);
 
 
-      // console.log(chalk.green("Deploy constructor this.config"), this.config);
-      // console.log(chalk.green("Deploy constructor this.env"), this.env);
-
-      // console.log(chalk.green("Deploy constructor this.flags"), this.flags);
-      // console.log(chalk.green("Deploy constructor this.argv"), this.argv);
-      // console.log(chalk.green("Deploy constructor process.argv"), process.argv);
-      // console.log(chalk.green("Deploy constructor this.args"), this.args);
-
-      // console.log(chalk.green("Deploy constructor this.args"), process);
-
-      // this.flags = {
-      //   force: true,
-      // }
-
-      // console.log(chalk.green("Deploy constructor this.flags 2"), this.flags);
 
       this.definition = new CustomPrismaDefinitionClass(
         this.env,
@@ -245,14 +234,6 @@ const deploySchema = async function (generateSchema) {
     debug: true,
   });
 
-  // result = await Deploy.mock({
-  //   mockConfig,
-  // },
-  // // ...process.argv,
-  //   // '--force',
-  //   // "true",
-  // )
-
   let argv = process.argv && process.argv.map(n => n) || [];
 
   argv.unshift({
@@ -272,9 +253,6 @@ const deploySchema = async function (generateSchema) {
 
 const getSchema = async function () {
 
-  const {
-    handler,
-  } = require("graphql-cli/dist/cmds/get-schema");
 
 
   const result = await handler({
@@ -287,7 +265,7 @@ const getSchema = async function () {
   return result;
 }
 
-module.exports = {
+export {
   buildApiSchema,
   deploySchema,
   getSchema,
