@@ -67,7 +67,7 @@ class CustomGenerateFragments extends GenerateFragments {
       result = await super.fragments()
     }
     catch (error) {
-      this.context.spinner.fail(error);
+      this.context.spinner.fail(error.message);
     }
 
     return result;
@@ -197,7 +197,7 @@ const deploySchema = function (generateSchema) {
 
           const result = await promise
             .catch(error => {
-              spinner.fail(this.out.stderr.output);
+              spinner.fail(error.message);
             });
 
           const {
