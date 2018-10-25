@@ -36,12 +36,6 @@ const {
   Deploy: prismaDeploy,
 } = PrismaCliCore;
 
-// console.log("PrismaDefinitionClass", PrismaDefinitionClass);
-// console.log("handler", handler);
-// console.log("Config", Config);
-// console.log("GenerateFragments", GenerateFragments);
-// console.log("prismaDeploy", typeof prismaDeploy, prismaDeploy);
-// console.log("Deploy", typeof Deploy, Deploy);
 
 class CustomGenerateFragments extends GenerateFragments {
 
@@ -110,18 +104,14 @@ const buildApiSchema = async function (generateSchema) {
    * Build api schema
    */
 
-  const apiSchema = await generateSchema("api");
+  const apiSchema = generateSchema("api");
 
 
-  // console.log("apiSchema", apiSchema);
-
-  // const fragments = builder.makeFragments(apiSchema);
   const fragments = await generator.handle()
     .catch(error => {
       console.error("Error", error);
     });
 
-  // console.log("builded api fragments", fragments);
 
 }
 
@@ -131,9 +121,19 @@ const buildApiSchema = async function (generateSchema) {
 const deploySchema = async function (generateSchema) {
 
 
-  const schema = await generateSchema("prisma");
+  let schema;
 
-  // console.log("schema", schema);
+  try {
+    schema = generateSchema("prisma");
+  }
+  catch (error) {
+    console.error(chalk.red("deploySchema error"), error);
+  }
+
+  if (!schema) {
+    throw new Error("Schema is empty");
+  }
+
 
   // return;
 
@@ -189,17 +189,24 @@ const deploySchema = async function (generateSchema) {
 
       const spinner = ora('Deploy schema').start();
 
-      // console.log("this.run this", this);
 
       let promise
 
-      promise = super.run(props);
+      try {
+        promise = super.run(props);
+      }
+      catch (error) {
+        console.error(chalk.red("Error"), error);
+        return;
+      }
 
 
       const result = await promise
         .catch(error => {
           spinner.fail(this.out.stderr.output);
-          console.error(chalk.red("promise Error"), error);
+          console.error(chalk.red("Deploy Error"), error);
+
+          return error;
         });
 
       const {
@@ -207,14 +214,21 @@ const deploySchema = async function (generateSchema) {
         stdout,
       } = this.out;
 
-      // if (stderr.output) {
-      //   spinner.fail(stderr.output);
+
+      // if (result instanceof Error) {
+
+      //   if (stderr.output) {
+      //     spinner.fail(stderr.output);
+      //   }
+ 
+      // }
+      // else {
+
       // }
 
       if (stdout.output) {
         spinner.succeed(stdout.output);
       }
-
 
       return result;
 
@@ -225,10 +239,12 @@ const deploySchema = async function (generateSchema) {
 
 
 
-  let result;
+  // let result;
 
 
   let mockConfig = new Config();
+
+
 
   Object.assign(mockConfig, {
     debug: true,
@@ -240,13 +256,25 @@ const deploySchema = async function (generateSchema) {
     mockConfig,
   });
 
-  // console.log("mock argv", argv);
 
-  result = await Deploy.mock.apply(Deploy, argv)
-    .catch(error => {
 
-      console.error(chalk.red("Error 2"), error);
-    });
+  try {
+
+    const HandlerObject = Deploy.mock.apply(Deploy, argv)
+      .then(handler => {
+
+        return handler;
+      })
+      .catch(error => {
+
+        console.error(chalk.red("Error 2"), error);
+      });
+
+  }
+  catch (error) {
+    console.error(chalk.red("Error 2"), error);
+  }
+
 
 }
 
@@ -260,6 +288,9 @@ const getSchema = async function () {
   }, {
       endpoint: process.env.endpoint,
       output: "src/schema/generated/prisma.graphql",
+    })
+    .catch(error => {
+      console.error(chalk.red("Get schema"), error);
     });
 
   return result;

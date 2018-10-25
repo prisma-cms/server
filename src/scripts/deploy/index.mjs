@@ -7,6 +7,8 @@ import {
   buildApiSchema,
 } from "./handlers";
 
+import chalk from "chalk";
+
 
 const deploy = async function (generateSchema) {
 
@@ -23,12 +25,12 @@ const deploy = async function (generateSchema) {
   await deploySchema(generateSchema)
     .then(r => {
 
-      // console.log("deploySchema OK");
+      console.log("deploySchema OK", r);
       return r;
     })
     .catch(error => {
 
-      // console.error("deploySchema Error");
+      console.error(chalk.red("deploySchema Error"), error);
     });
 
   // Downdload prisma schema from endpoint

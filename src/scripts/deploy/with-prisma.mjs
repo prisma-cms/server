@@ -1,3 +1,6 @@
+import chalk from "chalk";
+
+// import ora from "ora";
 
 import { generateSchema } from "../../schema";
 
@@ -5,8 +8,10 @@ import {
   deploy,
 } from "./";
 
-// console.log("deploy", deploy);
-// console.log("generateSchema", generateSchema);
-// console.log("generateSchema()", generateSchema("prisma"));
+deploy(generateSchema)
+.catch(error => {
+  console.error(chalk.red("deploy Error"), error);
+});
 
-deploy(generateSchema);
+
+// const spinner = ora('Deploy schema 2').start();
