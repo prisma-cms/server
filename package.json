@@ -18,9 +18,9 @@
     "test-nwb": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
-    "start": "node --experimental-modules src/server/index",
+    "start": "node --experimental-modules src/index",
     "start-dev": "nodemon --experimental-modules src/server/index",
-    "deploy": "NODE_ENV=test nodemon --experimental-modules src/server/scripts/deploy/with-prisma",
+    "deploy": "NODE_ENV=test node --experimental-modules src/server/scripts/deploy/with-prisma",
     "build-api": "node --experimental-modules src/server/scripts/deploy/api-only"
   },
   "dependencies": {

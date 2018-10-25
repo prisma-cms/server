@@ -13,7 +13,7 @@ const resolvers = cmsModule.getResolvers();
 
 
 startServer({
-  // typeDefs: 'src/server/schema/generated/api.graphql',
+  typeDefs: 'src/schema/generated/api.graphql',
   resolvers,
 });
 
