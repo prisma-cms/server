@@ -118,162 +118,138 @@ const buildApiSchema = async function (generateSchema) {
 
 
 
-const deploySchema = async function (generateSchema) {
+const deploySchema = function (generateSchema) {
+
+  return new Promise(async (resolve, reject) => {
 
 
-  let schema;
+    let schema;
 
-  try {
-    schema = generateSchema("prisma");
-  }
-  catch (error) {
-    console.error(chalk.red("deploySchema error"), error);
-  }
-
-  if (!schema) {
-    throw new Error("Schema is empty");
-  }
-
-
-  // return;
-
-  class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
-
-
-    async load(args, envPath) {
-
-
-      let {
-        envVars,
-        ...other
-      } = this;
-
-      const {
-        endpoint,
-      } = envVars;
-
-      this.definition = {
-        endpoint,
-        datamodel: true,
-      }
-
-      this.typesString = schema;
-
-
-      return;
+    try {
+      schema = generateSchema("prisma");
+    }
+    catch (error) {
+      console.error(chalk.red("deploySchema error"), error);
+      reject(error);
     }
 
-  }
-
-
-  class Deploy extends prismaDeploy {
-
-    constructor(options) {
-
-      super(options);
-
-
-
-      this.definition = new CustomPrismaDefinitionClass(
-        this.env,
-        this.config.definitionPath,
-        process.env,
-        this.out,
-      )
-
+    if (!schema) {
+      return reject(new Error("Schema is empty"));
     }
 
-    // const spinner = ora('Deploy schema');
 
-    async run(props) {
-
-      const spinner = ora('Deploy schema').start();
+    class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
 
 
-      let promise
+      async load(args, envPath) {
 
-      try {
-        promise = super.run(props);
-      }
-      catch (error) {
-        console.error(chalk.red("Error"), error);
+
+        let {
+          envVars,
+          ...other
+        } = this;
+
+        const {
+          endpoint,
+        } = envVars;
+
+        this.definition = {
+          endpoint,
+          datamodel: true,
+        }
+
+        this.typesString = schema;
+
+
         return;
       }
 
-
-      const result = await promise
-        .catch(error => {
-          spinner.fail(this.out.stderr.output);
-          console.error(chalk.red("Deploy Error"), error);
-
-          return error;
-        });
-
-      const {
-        stderr,
-        stdout,
-      } = this.out;
+    }
 
 
-      // if (result instanceof Error) {
+    class Deploy extends prismaDeploy {
 
-      //   if (stderr.output) {
-      //     spinner.fail(stderr.output);
-      //   }
- 
-      // }
-      // else {
+      constructor(options) {
 
-      // }
+        super(options);
 
-      if (stdout.output) {
-        spinner.succeed(stdout.output);
+
+
+        this.definition = new CustomPrismaDefinitionClass(
+          this.env,
+          this.config.definitionPath,
+          process.env,
+          this.out,
+        )
+
       }
 
-      return result;
+      // const spinner = ora('Deploy schema');
+
+      async run(props, args) {
+
+        const spinner = ora('Deploy schema').start();
+
+
+        try {
+          const promise = super.run(props);
+
+
+          const result = await promise
+            .catch(error => {
+              spinner.fail(this.out.stderr.output);
+            });
+
+          const {
+            stderr,
+            stdout,
+          } = this.out;
+
+
+
+          if (stdout.output) {
+            spinner.succeed(stdout.output);
+          }
+
+          resolve(result);
+
+          return result;
+        }
+        catch (error) {
+          console.error(chalk.red("Error"), error);
+          reject(error);
+        }
+
+      }
+
 
     }
 
 
-  }
 
+    let argv = process.argv && process.argv.map(n => n) || [];
 
+    const force = argv && argv.indexOf("--force") !== -1 || false;
+    
+    try {
+      const HandlerObject = await Deploy.mock(force ? "-f" : "")
+        .then(handler => {
 
-  // let result;
+          return handler;
+        })
+        .catch(error => {
 
+          console.error(chalk.red("Error 2"), error);
+        });
 
-  let mockConfig = new Config();
+        console.log("HandlerObject.flags", HandlerObject.flags);
 
+    }
+    catch (error) {
+      console.error(chalk.red("Error 2"), error);
+    }
 
-
-  Object.assign(mockConfig, {
-    debug: true,
   });
-
-  let argv = process.argv && process.argv.map(n => n) || [];
-
-  argv.unshift({
-    mockConfig,
-  });
-
-
-
-  try {
-
-    const HandlerObject = Deploy.mock.apply(Deploy, argv)
-      .then(handler => {
-
-        return handler;
-      })
-      .catch(error => {
-
-        console.error(chalk.red("Error 2"), error);
-      });
-
-  }
-  catch (error) {
-    console.error(chalk.red("Error 2"), error);
-  }
 
 
 }

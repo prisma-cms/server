@@ -1,3 +1,7 @@
+2.1.0
+=====================================
+- Breaking changes. Move modules Files, Letters, User, Logs into separated components.
+
 2.0.2
 =====================================
 - Fix deploy schema

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.0.2-beta",
+  "version": "2.1.0-beta",
   "description": "Server for @prisma-cms",
   "main": "lib/server/index",
   "module": "es/server/index",
@@ -18,10 +18,10 @@
     "test-nwb": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server",
-    "start": "Sendmail=true action=start-server node --experimental-modules src/index",
-    "start-dev": "Sendmail=true action=start-server nodemon --experimental-modules src/index",
-    "deploy": "NODE_ENV=test node --experimental-modules src/scripts/deploy/with-prisma",
-    "build-api": "node --experimental-modules src/scripts/deploy/api-only"
+    "start": "node --experimental-modules src/server/index",
+    "start-dev": "nodemon --experimental-modules src/server/index",
+    "deploy": "NODE_ENV=test nodemon --experimental-modules src/server/scripts/deploy/with-prisma",
+    "build-api": "node --experimental-modules src/server/scripts/deploy/api-only"
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.5-beta",

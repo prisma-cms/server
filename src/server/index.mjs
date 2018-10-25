@@ -3,7 +3,6 @@
 import Mailer from "../plugins/Mailer";
 import sendmailServer from "sendmail";
 import CmsModule from "../modules";
-// import { GraphQLServer } from "graphql-yoga";
 import graphqlYoga from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
 
@@ -14,10 +13,7 @@ import ImageThumbMiddleware from "../middleware/ImageThumb";
 const {
   GraphQLServer,
 } = graphqlYoga;
-
-// console.log("GraphQLServer", GraphQLServer);
-
-// console.log("ImageThumbMiddleware", ImageThumbMiddleware);
+ 
 
 const cmsModule = new CmsModule({
 

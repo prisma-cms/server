@@ -1,9 +1,0 @@
- 
-scalar Upload
-
-
-type Error {
-  key: String!
-  message: String!
-}
-

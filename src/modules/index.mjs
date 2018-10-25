@@ -8,11 +8,6 @@ import RouterModule from "@prisma-cms/router";
 
 import MergeSchema from 'merge-graphql-schemas';
 
-import { parse } from "graphql";
-
-import UsersModule from "./user";
-import FilesModule from "./Files";
-import LettersModule from "./letters";
 
 import path from 'path';
 
@@ -27,20 +22,6 @@ class CmsModule extends PrismaModule {
 
   constructor(options = {}) {
 
-    let {
-      modules = [],
-    } = options;
-
-    modules = modules.concat([
-      UsersModule,
-      FilesModule,
-      RouterModule,
-      LettersModule,
-    ]);
-
-    Object.assign(options, {
-      modules,
-    });
 
     super(options);
 

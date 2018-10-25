@@ -22,24 +22,25 @@ const deploy = async function (generateSchema) {
   }
 
   // Deploy prisma schema
-  await deploySchema(generateSchema)
-    .then(r => {
+  return await deploySchema(generateSchema)
+    .then(async () => {
 
-      console.log("deploySchema OK", r);
-      return r;
+      // Downdload prisma schema from endpoint
+      await getSchema()
+        .then(async () => {
+
+          // build API schema
+          await buildApiSchema(generateSchema);
+          // console.log("buildApiSchema OK");
+        });
+
     })
     .catch(error => {
 
       console.error(chalk.red("deploySchema Error"), error);
     });
 
-  // Downdload prisma schema from endpoint
-  await getSchema();
-  // console.log("getSchema OK");
 
-  // build API schema
-  await buildApiSchema(generateSchema);
-  // console.log("buildApiSchema OK");
 
 }
 

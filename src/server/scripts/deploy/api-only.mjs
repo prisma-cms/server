@@ -1,6 +1,6 @@
 
 
-import { generateSchema } from "../../schema";
+import { generateSchema } from "./schema";
 
 import {
   buildApiSchema,
