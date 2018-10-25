@@ -31,8 +31,6 @@ const deploy = async function (generateSchema) {
       // console.error("deploySchema Error");
     });
 
-  return;
-
   // Downdload prisma schema from endpoint
   await getSchema();
   // console.log("getSchema OK");
