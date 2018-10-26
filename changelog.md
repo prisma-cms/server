@@ -1,3 +1,8 @@
+2.1.5
+=====================================
+- Upgrade @prisma-cms/prisma-context
+- Remove prisma-binding
+
 2.1.4
 =====================================
 - Upgrade graphql
