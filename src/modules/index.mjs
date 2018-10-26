@@ -4,7 +4,6 @@ import fs from "fs";
 import chalk from "chalk";
 
 import PrismaModule from "@prisma-cms/prisma-module";
-import RouterModule from "@prisma-cms/router";
 
 import MergeSchema from 'merge-graphql-schemas';
 

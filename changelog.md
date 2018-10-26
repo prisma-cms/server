@@ -1,3 +1,7 @@
+2.1.2
+=====================================
+- Upgrade @prisma-cms/upload-module
+
 2.1.1
 =====================================
 - Fix deploy errors handle

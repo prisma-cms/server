@@ -8,7 +8,7 @@ import Context from "@prisma-cms/prisma-context";
 
 import Knex from "knex";
 
-import ImageThumbMiddleware from "../middleware/ImageThumb";
+import {ImagesMiddleware} from "@prisma-cms/upload-module";
 
 const {
   GraphQLServer,
@@ -31,7 +31,7 @@ export const startServer = function (options = {}) {
     sendmailOptions,
     knexOptions,
     contextOptions,
-    imagesMiddleware = ImageThumbMiddleware,
+    imagesMiddleware = ImagesMiddleware,
     Mailer: MailerPlugin,
     MailerProps,
 
