@@ -16,7 +16,7 @@ class Mailer extends Payload {
 
     this.objectType = "Letter";
 
-    this.sendEmail = (to, subject, message) => this.sendEmail(to, subject, message)
+    this.sendEmail = this.sendEmail.bind(this)
 
   }
 
