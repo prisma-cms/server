@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.1.7-beta",
+  "version": "2.1.8-beta",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "@prisma-cms/prisma-context": "^1.0.6-beta",
-    "@prisma-cms/prisma-module": "^1.1.0-beta",
+    "@prisma-cms/prisma-module": "^1.2.0-beta",
     "@prisma-cms/prisma-processor": "^1.0.3-beta",
     "@prisma-cms/prisma-schema": "^1.0.3-beta",
-    "@prisma-cms/upload-module": "^1.3.4-beta",
+    "@prisma-cms/upload-module": "^1.3.6-beta",
     "chalk": "^2.4.1",
     "dns": "^0.2.2",
     "graphql": "^14.0.2",
@@ -29,8 +29,8 @@
     "mysql": "^2.16.0",
     "net": "^1.0.2",
     "ora": "^3.0.0",
-    "prisma-cli-core": "^1.19.0",
-    "prisma-cli-engine": "^1.19.0",
+    "prisma-cli-core": "^1.19.1",
+    "prisma-cli-engine": "^1.19.1",
     "sendmail": "^1.4.1"
   },
   "devDependencies": {},
