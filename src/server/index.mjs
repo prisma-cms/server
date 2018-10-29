@@ -31,12 +31,17 @@ export const startServer = function (options = {}) {
     sendmailOptions,
     knexOptions,
     contextOptions,
-    imagesMiddleware = ImagesMiddleware,
+    imagesMiddleware,
     Mailer: MailerPlugin,
     MailerProps,
 
     ...serverOptions
   } = options;
+
+
+  if(imagesMiddleware === undefined){
+    imagesMiddleware = new ImagesMiddleware().processRequest;
+  }
 
 
   if (MailerPlugin === undefined) {
