@@ -49,7 +49,7 @@ class CmsModule extends PrismaModule {
   }
 
 
-  getApiSchema(types = []) {
+  getApiSchema(types = [], excludeTypes = []) {
 
 
     let baseSchema = [];
@@ -60,7 +60,7 @@ class CmsModule extends PrismaModule {
       baseSchema = fs.readFileSync(schemaFile, "utf-8");
     }
 
-    let apiSchema = super.getApiSchema(types.concat(baseSchema), []);
+    let apiSchema = super.getApiSchema(types.concat(baseSchema), excludeTypes);
 
     let schema = fileLoader(__dirname + '/schema/api/', {
       recursive: true,

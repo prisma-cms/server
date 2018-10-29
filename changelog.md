@@ -1,3 +1,8 @@
+2.1.9
+=====================================
+- Upgrade dependencies
+- Fix getApiSchema
+
 2.1.8
 =====================================
 - Upgrade dependencies
