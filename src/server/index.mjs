@@ -6,7 +6,7 @@ import CmsModule from "../modules";
 import graphqlYoga from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
 
-import Knex from "knex";
+// import Knex from "knex";
 
 import { ImagesMiddleware } from "@prisma-cms/upload-module";
 
@@ -51,7 +51,7 @@ export class PrismaCmsServer {
 
       let {
         sendmailOptions,
-        knexOptions,
+        // knexOptions,
         contextOptions,
         imagesMiddleware,
         // Mailer: MailerPlugin,
@@ -105,18 +105,18 @@ export class PrismaCmsServer {
       const sendmail = sendmailServer(sendmailOptions);
 
 
-      knexOptions = {
-        client: 'mysql',
-        connection: {
-          host: 'mysql.prisma',
-          user: 'root',
-          database: 'prisma@dev',
-          password: 'prisma',
-        },
-        ...knexOptions,
-      }
+      // knexOptions = {
+      //   client: 'mysql',
+      //   connection: {
+      //     host: 'mysql.prisma',
+      //     user: 'root',
+      //     database: 'prisma@dev',
+      //     password: 'prisma',
+      //   },
+      //   ...knexOptions,
+      // }
 
-      const knex = Knex(knexOptions);
+      // const knex = Knex(knexOptions);
 
 
       contextOptions = {
@@ -124,7 +124,7 @@ export class PrismaCmsServer {
         secret: 'mysecret123',
         debug: false,
         APP_SECRET: process.env.APP_SECRET,
-        knex,
+        // knex,
         sendmail,
         MailerProps,
         ...contextOptions,
