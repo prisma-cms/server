@@ -1,10 +1,15 @@
 
 
 import Mailer from "../plugins/Mailer";
-import sendmailServer from "sendmail";
+// import sendmailServer from "sendmail";
+import {
+  sendmail as sendmailServer,
+} from "@prisma-cms/mail-module";
 import CmsModule from "../modules";
 import graphqlYoga from "graphql-yoga";
 import Context from "@prisma-cms/prisma-context";
+
+import fs from "fs";
 
 // import Knex from "knex";
 
@@ -70,6 +75,20 @@ export class PrismaCmsServer {
       //   MailerPlugin = Mailer;
       // }
 
+      let dkim;
+
+      const {
+        SendmailDkimFile,
+        SendmailDkimKeySelector,
+      } = process.env;
+
+      if (SendmailDkimFile) {
+        dkim = {
+          privateKey: fs.readFileSync(SendmailDkimFile, 'utf8'),
+          keySelector: SendmailDkimKeySelector,
+        };
+      }
+
 
       let sendmailOptionsDefault = {
         logger: {
@@ -79,10 +98,7 @@ export class PrismaCmsServer {
           error: console.error
         },
         silent: true,
-        // dkim: { // Default: False
-        //   privateKey: fs.readFileSync(__dirname + '/dkim-private.pem', 'utf8'),
-        //   keySelector: ''
-        // },
+        dkim,
       }
 
 

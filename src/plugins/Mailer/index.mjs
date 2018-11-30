@@ -1,5 +1,6 @@
 
 import Payload from "@prisma-cms/prisma-processor";
+import chalk from "chalk";
 
 
 class Mailer extends Payload {
@@ -67,10 +68,15 @@ class Mailer extends Payload {
       where: {
         status: "Created",
       },
-    });
+      orderBy: "rank_DESC",
+    })
+      .catch(error => {
+        console.error(chalk.red("Mail plugin error"), error);
+        throw error;
+      });
 
 
-    // console.log("sendLetters letters", letters);
+    console.log("sendLetters letters", letters);
 
     const letter = letters && letters[0];
 
@@ -87,6 +93,7 @@ class Mailer extends Payload {
 
   async sendLetter(letter) {
 
+    console.log(chalk.green("sendLetter letter"), letter);
 
     const {
       id,
@@ -110,12 +117,13 @@ class Mailer extends Payload {
         return r;
       })
       .catch(async error => {
+        
+        console.error(chalk.red("Sendmail error"), error);
 
         await this.updateLetter(id, {
           status: "Error",
         });
 
-        // this.error(new Error("Error"));
         this.error(error);
       });
     ;
@@ -161,11 +169,10 @@ class Mailer extends Payload {
         html: `${message}
         <hr />
         ${footer}`,
-      }, function (err, reply) {
-        // console.log(err && err.stack);
+      }, function (error, reply) {
         // console.dir(reply);
-        if (err) {
-          reject(err);
+        if (error) {
+          reject(error);
         }
         else {
           resolve(true);
@@ -173,9 +180,6 @@ class Mailer extends Payload {
       });
 
     });
-
-
-
 
   }
 

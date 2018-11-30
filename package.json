@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.2.1-beta",
+  "version": "2.2.2",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -9,10 +9,13 @@
   ],
   "scripts": {
     "start": "node --experimental-modules src/index",
+    "start-dev": "nodemon --experimental-modules src/index",
     "deploy": "NODE_ENV=test node --experimental-modules src/server/scripts/deploy/with-prisma",
     "build-api": "node --experimental-modules src/server/scripts/deploy/api-only"
   },
   "dependencies": {
+    "@prisma-cms/log-module": "latest",
+    "@prisma-cms/mail-module": "latest",
     "@prisma-cms/prisma-context": "latest",
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/prisma-processor": "latest",
@@ -25,14 +28,17 @@
     "graphql-yoga": "^1.16.1",
     "merge-graphql-schemas": "latest",
     "prisma-cli-core": "^1.19.1",
-    "prisma-cli-engine": "^1.19.1",
-    "sendmail": "^1.4.1"
+    "prisma-cli-engine": "^1.19.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.5"
+  },
   "engines": {
     "node": ">=10.x"
   },
-  "resolutions": {},
+  "resolutions": {
+    "graphql": "14.0.2"
+  },
   "author": "Fi1osof",
   "license": "MIT",
   "repository": {

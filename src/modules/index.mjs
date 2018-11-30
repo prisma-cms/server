@@ -4,6 +4,8 @@ import fs from "fs";
 import chalk from "chalk";
 
 import PrismaModule from "@prisma-cms/prisma-module";
+import MailModule from "@prisma-cms/mail-module";
+import LogModule from "@prisma-cms/log-module";
 
 import MergeSchema from 'merge-graphql-schemas';
 
@@ -23,6 +25,11 @@ class CmsModule extends PrismaModule {
 
 
     super(options);
+
+    this.mergeModules([
+      MailModule,
+      LogModule,
+    ]);
 
   }
 
