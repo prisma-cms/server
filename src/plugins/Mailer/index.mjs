@@ -76,11 +76,9 @@ class Mailer extends Payload {
       });
 
 
-    console.log("sendLetters letters", letters);
+    // console.log("sendLetters letters", letters);
 
     const letter = letters && letters[0];
-
-    // console.log("sendLetters letter", letter);
 
     if (letter) {
       this.sendLetter(letter);
@@ -93,13 +91,19 @@ class Mailer extends Payload {
 
   async sendLetter(letter) {
 
-    console.log(chalk.green("sendLetter letter"), letter);
+    // console.log(chalk.green("sendLetter letter"), letter);
+
+
+    const {
+      db,
+    } = this.ctx;
 
     const {
       id,
       email,
       subject,
       message,
+      deleteOnSend,
     } = letter;
 
 
@@ -117,7 +121,7 @@ class Mailer extends Payload {
         return r;
       })
       .catch(async error => {
-        
+
         console.error(chalk.red("Sendmail error"), error);
 
         await this.updateLetter(id, {
@@ -127,6 +131,16 @@ class Mailer extends Payload {
         this.error(error);
       });
     ;
+
+    if (deleteOnSend) {
+
+      await db.mutation.deleteLetter({
+        where: {
+          id,
+        },
+      });
+
+    }
 
     this.sendLetters();
 

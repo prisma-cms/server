@@ -1,3 +1,7 @@
+2.2.3
+=====================================
+- Autodelete letters if Letter::deleteOnSend
+
 2.2.2
 =====================================
 - Remove sendmail
