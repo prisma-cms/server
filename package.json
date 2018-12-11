@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -11,7 +11,9 @@
     "start": "node --experimental-modules src/index",
     "start-dev": "nodemon --experimental-modules src/index",
     "deploy": "NODE_ENV=test node --experimental-modules src/server/scripts/deploy/with-prisma",
-    "build-api": "node --experimental-modules src/server/scripts/deploy/api-only"
+    "build-api": "node --experimental-modules src/server/scripts/deploy/api-only",
+    "get-api-schema": "graphql get-schema -o src/schema/generated/api.graphql",
+    "build-api-fragments": "node --experimental-modules src/server/scripts/deploy/build-api-fragments"
   },
   "dependencies": {
     "@prisma-cms/log-module": "latest",

@@ -1,3 +1,8 @@
+2.2.4
+=====================================
+- Added yarn get-api-schema
+- Added yarn build-api-fragments
+
 2.2.3
 =====================================
 - Autodelete letters if Letter::deleteOnSend

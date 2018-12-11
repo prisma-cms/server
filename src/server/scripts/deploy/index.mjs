@@ -5,6 +5,7 @@ import {
   deploySchema,
   getSchema,
   buildApiSchema,
+  buildApiFragments,
 } from "./handlers";
 
 import chalk from "chalk";
@@ -50,4 +51,5 @@ export {
   getSchema,
   buildApiSchema,
   deploy,
+  buildApiFragments,
 }

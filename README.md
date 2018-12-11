@@ -8,3 +8,7 @@ endpoint=http://localhost:4466/{project}/{stage} yarn deploy
 endpoint=http://localhost:4466/{project}/{stage} yarn start
 
 ### Attention! node-js 10+ required
+
+## Get remote API schema and build graphql fragments
+yarn get-api-schema --endpoint, -e Endpoint name or URL
+yarn build-api-fragments

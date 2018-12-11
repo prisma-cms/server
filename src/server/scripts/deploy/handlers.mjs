@@ -107,11 +107,18 @@ const buildApiSchema = async function (generateSchema) {
   const apiSchema = generateSchema("api");
 
 
+  await buildApiFragments();
+
+
+}
+
+
+const buildApiFragments = async function () {
+
   const fragments = await generator.handle()
     .catch(error => {
       console.error("Error", error);
     });
-
 
 }
 
@@ -230,7 +237,7 @@ const deploySchema = function (generateSchema) {
     let argv = process.argv && process.argv.map(n => n) || [];
 
     const force = argv && argv.indexOf("--force") !== -1 || false;
-    
+
     try {
       const HandlerObject = await Deploy.mock(force ? "-f" : "")
         .then(handler => {
@@ -242,7 +249,7 @@ const deploySchema = function (generateSchema) {
           console.error(chalk.red("Error 2"), error);
         });
 
-        console.log("HandlerObject.flags", HandlerObject.flags);
+      console.log("HandlerObject.flags", HandlerObject.flags);
 
     }
     catch (error) {
@@ -276,4 +283,5 @@ export {
   buildApiSchema,
   deploySchema,
   getSchema,
+  buildApiFragments,
 }
