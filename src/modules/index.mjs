@@ -61,7 +61,7 @@ class CmsModule extends PrismaModule {
 
     let baseSchema = [];
 
-    let schemaFile = "src/schema/generated/prisma.graphql";
+    let schemaFile = __dirname + "/../schema/generated/prisma.graphql";
 
     if (fs.existsSync(schemaFile)) {
       baseSchema = fs.readFileSync(schemaFile, "utf-8");
