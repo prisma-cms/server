@@ -104,6 +104,8 @@ class Mailer extends Payload {
       subject,
       message,
       deleteOnSend,
+      replyTo,
+      returnTo,
     } = letter;
 
 
@@ -111,7 +113,7 @@ class Mailer extends Payload {
       status: "Processing",
     });
 
-    await this.sendEmail(email, subject, message)
+    await this.sendEmail(email, subject, message, replyTo, returnTo)
       .then(async r => {
 
         await this.updateLetter(id, {
@@ -163,7 +165,7 @@ class Mailer extends Payload {
 
 
 
-  sendEmail(to, subject, message) {
+  sendEmail(to, subject, message, replyTo, returnTo) {
 
     const {
       sendmail,
@@ -183,6 +185,8 @@ class Mailer extends Payload {
         html: `${message}
         <hr />
         ${footer}`,
+        replyTo,
+        returnTo,
       }, function (error, reply) {
         // console.dir(reply);
         if (error) {

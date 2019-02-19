@@ -1,3 +1,8 @@
+2.2.5
+=====================================
+- Added replyTo
+- Added returnTo
+
 2.2.4
 =====================================
 - Added yarn get-api-schema
