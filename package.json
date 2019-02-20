@@ -33,7 +33,7 @@
     "prisma-cli-engine": "^1.19.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.5"
+    "nodemon": "latest"
   },
   "engines": {
     "node": ">=10.x"
