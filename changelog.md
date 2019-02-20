@@ -1,3 +1,8 @@
+2.2.6
+=====================================
+- Added replyTo
+- Added returnTo
+
 2.2.5
 =====================================
 - Get API schema relative path
