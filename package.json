@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -33,7 +33,7 @@
     "prisma-cli-engine": "^1.19.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.5"
+    "nodemon": "latest"
   },
   "engines": {
     "node": ">=10.x"
