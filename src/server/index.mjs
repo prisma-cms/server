@@ -29,6 +29,51 @@ const resolvers = cmsModule.getResolvers();
 const endpoint = process.env.endpoint;
 
 
+export const modifyArgs = function (where, modifier, info) {
+
+  if (where && modifier) {
+
+
+    /**
+     * Очищаем все аргументы, иначе вычищаемый параметр будет взят в дальнейшем
+     * из объекта info.
+     * Делать это надо только один раз
+     */
+
+    if (info) {
+      info.fieldNodes.map(n => {
+        n.arguments = []
+      });
+    }
+
+    if (typeof where === "object") {
+
+      if (Array.isArray(where)) {
+
+        where.map(n => modifyArgs(n, modifier))
+
+      }
+      else {
+
+        modifier(where);
+
+        /**
+         * Проходим по всем остальным элементам условия
+         */
+        for (var i in where) {
+          modifyArgs(where[i], modifier);
+        }
+
+      }
+
+    }
+
+  }
+
+  return where;
+}
+
+
 export class PrismaCmsServer {
 
 
