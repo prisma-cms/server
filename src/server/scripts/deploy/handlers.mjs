@@ -249,7 +249,7 @@ const deploySchema = function (generateSchema) {
           console.error(chalk.red("Error 2"), error);
         });
 
-      console.log("HandlerObject.flags", HandlerObject.flags);
+      // console.log("HandlerObject.flags", HandlerObject.flags);
 
     }
     catch (error) {
