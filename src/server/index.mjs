@@ -263,9 +263,17 @@ export class PrismaCmsServer {
         ...contextOptions,
       }
 
-      const context = new Context(contextOptions);
+      const {
+        processRequest,
+        db,
+      } = new Context(contextOptions);
 
-      this.context = context;
+      this.db = db;
+
+      // console.log("context", processRequest);
+      // console.log("context db", db);
+
+      this.context = processRequest;
 
 
       this.server = new GraphQLServer({
@@ -285,7 +293,11 @@ export class PrismaCmsServer {
 
     }
 
-    return this.server;
+    // return this.server;
+    return {
+      server: this.server,
+      db: this.db,
+    };
   }
 
 
@@ -298,7 +310,9 @@ export class PrismaCmsServer {
   startServer() {
 
 
-    const server = this.getServer();
+    const {
+      server,
+    } = this.getServer();
 
 
     server

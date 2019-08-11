@@ -1,3 +1,8 @@
+2.4.0
+=====================================
+- Upgrade @prisma-cms/context
+- Added docker config
+
 2.3.1
 =====================================
 - Fix request context
