@@ -307,17 +307,25 @@ export class PrismaCmsServer {
   }
 
 
-  startServer() {
+  startServer(options = {}) {
 
 
     const {
       server,
     } = this.getServer();
 
+    const {
+      bodyParserOptions,
+      ...other
+    } = options || {};
 
-    server
-      // .start(() => console.log('Server is running on http://localhost:4000'))
-      .start(() => this.beforeStart())
+    server.start({
+      bodyParserOptions: {
+        ...bodyParserOptions,
+        limit: "10mb",
+      },
+      ...other
+    }, () => this.beforeStart())
 
     return server;
   }
