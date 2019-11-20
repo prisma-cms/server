@@ -1,3 +1,7 @@
+2.4.2
+=====================================
+- Move @prisma-cms/upload-module to dev deps
+
 2.4.1
 =====================================
 - Added bodyParserOptions

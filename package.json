@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -22,7 +22,6 @@
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/prisma-processor": "latest",
     "@prisma-cms/prisma-schema": "latest",
-    "@prisma-cms/upload-module": "latest",
     "chalk": "^2.4.1",
     "graphql": "latest",
     "graphql-cli": "^2.16.5",
@@ -33,6 +32,7 @@
     "prisma-cli-engine": "^1.19.1"
   },
   "devDependencies": {
+    "@prisma-cms/upload-module": "latest",
     "nodemon": "latest"
   },
   "engines": {
