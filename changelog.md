@@ -1,3 +1,7 @@
+2.5.0
+=====================================
+- Added paginationMiddleware
+
 2.4.2
 =====================================
 - Move @prisma-cms/upload-module to dev deps
