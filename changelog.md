@@ -1,3 +1,8 @@
+2.5.1
+=====================================
+- Added eslint
+- Fix middleware
+
 2.5.0
 =====================================
 - Added paginationMiddleware

@@ -12,7 +12,9 @@ import MergeSchema from 'merge-graphql-schemas';
 
 import path from 'path';
 
+/* eslint-disable */
 const moduleURL = new URL(import.meta.url);
+/* eslint-enable */
 
 const __dirname = path.dirname(moduleURL.pathname);
 
