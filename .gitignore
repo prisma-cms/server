@@ -8,3 +8,4 @@ npm-debug.log*
 *.lock
 *.log
 /src/node_modules__
+/package-lock.json
