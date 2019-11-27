@@ -1,16 +1,15 @@
-import chalk from "chalk";
+import chalk from 'chalk'
 
 import {
   deploy,
-} from "./";
+} from './'
 
-import { generateSchema } from "./schema"
+import { generateSchema } from './schema'
 
 
 try {
   deploy(generateSchema)
-}
-catch (error) {
-  console.error(chalk.red("Deploy prisma Error"), error);
+} catch (error) {
+  console.error(chalk.red('Deploy prisma Error'), error)
 };
 

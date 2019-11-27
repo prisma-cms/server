@@ -15,6 +15,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    "no-multiple-empty-lines": "off"
+    "no-multiple-empty-lines": "off",
+    "space-before-function-paren": "off",
+    "comma-dangle": "off",
   }
 }

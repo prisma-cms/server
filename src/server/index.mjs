@@ -1,62 +1,53 @@
 
 
-import Mailer from "../plugins/Mailer";
+import Mailer from '../plugins/Mailer'
 // import sendmailServer from "sendmail";
 import {
-  sendmail as sendmailServer,
-} from "@prisma-cms/mail-module";
-import CmsModule from "../modules";
-import graphqlYoga from "graphql-yoga";
-import Context from "@prisma-cms/prisma-context";
+  sendmail as sendmailServer
+} from '@prisma-cms/mail-module'
+import CmsModule from '../modules'
+import graphqlYoga from 'graphql-yoga'
+import Context from '@prisma-cms/prisma-context'
 
-import fs from "fs";
-
-import chalk from "chalk";
+import fs from 'fs'
 
 // import Knex from "knex";
 
-import { ImagesMiddleware } from "@prisma-cms/upload-module";
-import { modifyArgs } from "./helpers/modifyArgs.mjs";
-import paginationMiddleware from './middlewares/pagination';
+import { ImagesMiddleware } from '@prisma-cms/upload-module'
+import { modifyArgs } from './helpers/modifyArgs.mjs'
+import paginationMiddleware from './middlewares/pagination'
+import denyMutationsMiddleware from './middlewares/denyMutations'
 
 const {
-  GraphQLServer,
-} = graphqlYoga;
+  GraphQLServer
+} = graphqlYoga
 
 
 const cmsModule = new CmsModule({
 
-});
+})
 
-const resolvers = cmsModule.getResolvers();
+const resolvers = cmsModule.getResolvers()
 
-const endpoint = process.env.endpoint;
+const endpoint = process.env.endpoint
 
 
 export class PrismaCmsServer {
-
-
   constructor(options = {}) {
+    this.options = options
 
-    this.options = options;
-
-    this.startServer = this.startServer.bind(this);
-
+    this.startServer = this.startServer.bind(this)
   }
 
 
   getOptions() {
-
-    return this.options || {};
+    return this.options || {}
   }
 
 
   getServer() {
-
     if (!this.server) {
-
-
-      const options = this.getOptions();
+      const options = this.getOptions()
 
       let {
         sendmailOptions,
@@ -67,11 +58,11 @@ export class PrismaCmsServer {
         MailerProps,
 
         ...serverOptions
-      } = options;
+      } = options
 
 
       if (imagesMiddleware === undefined) {
-        imagesMiddleware = new ImagesMiddleware().processRequest;
+        imagesMiddleware = new ImagesMiddleware().processRequest
       }
 
 
@@ -79,22 +70,22 @@ export class PrismaCmsServer {
       //   MailerPlugin = Mailer;
       // }
 
-      let dkim;
+      let dkim
 
       const {
         SendmailDkimFile,
-        SendmailDkimKeySelector,
-      } = process.env;
+        SendmailDkimKeySelector
+      } = process.env
 
       if (SendmailDkimFile) {
         dkim = {
           privateKey: fs.readFileSync(SendmailDkimFile, 'utf8'),
-          keySelector: SendmailDkimKeySelector,
-        };
+          keySelector: SendmailDkimKeySelector
+        }
       }
 
 
-      let sendmailOptionsDefault = {
+      const sendmailOptionsDefault = {
         logger: {
           debug: console.log,
           info: console.info,
@@ -102,27 +93,27 @@ export class PrismaCmsServer {
           error: console.error
         },
         silent: true,
-        dkim,
+        dkim
       }
 
 
-      if (process.env.SendmailTest === "true") {
+      if (process.env.SendmailTest === 'true') {
         Object.assign(sendmailOptionsDefault, {
           silent: false,
           devPort: 1025, // Default: False
           devHost: 'localhost', // Default: localhost
           smtpPort: 2525, // Default: 25
           smtpHost: 'localhost' // Default: -1 - extra smtp host after resolveMX
-        });
+        })
       }
 
 
       sendmailOptions = {
         ...sendmailOptionsDefault,
-        ...sendmailOptions,
+        ...sendmailOptions
       }
 
-      const sendmail = sendmailServer(sendmailOptions);
+      const sendmail = sendmailServer(sendmailOptions)
 
 
       // knexOptions = {
@@ -147,112 +138,102 @@ export class PrismaCmsServer {
         // knex,
         sendmail,
         MailerProps,
-        ...contextOptions,
+        ...contextOptions
       }
 
       const {
         processRequest,
-        db,
-      } = new Context(contextOptions);
+        db
+      } = new Context(contextOptions)
 
-      this.db = db;
+      this.db = db
 
       // console.log("context", processRequest);
       // console.log("context db", db);
 
-      this.context = processRequest;
+      this.context = processRequest
 
 
       this.server = new GraphQLServer({
         typeDefs: 'src/schema/generated/api.graphql',
         resolverValidationOptions: {
-          requireResolversForResolveType: false,
+          requireResolversForResolveType: false
         },
         context: request => this.processRequest(request),
         resolvers,
-        ...serverOptions,
-      });
+        ...serverOptions
+      })
 
 
       if (imagesMiddleware) {
         this.server.use('/images/:type/**', imagesMiddleware)
       }
-
     }
 
     // return this.server;
     return {
       server: this.server,
-      db: this.db,
-    };
+      db: this.db
+    }
   }
 
 
   processRequest(request) {
-
-    return this.context(request);
+    return this.context(request)
   }
 
 
   startServer(options = {}) {
-
-
     const {
-      server,
-    } = this.getServer();
+      server
+    } = this.getServer()
 
     const {
       bodyParserOptions,
       ...other
-    } = options || {};
+    } = options || {}
 
     server.start({
       bodyParserOptions: {
         ...bodyParserOptions,
-        limit: "10mb",
+        limit: '10mb'
       },
       ...other
     }, () => this.beforeStart())
 
-    return server;
+    return server
   }
 
 
   async beforeStart() {
+    const ctx = await this.context()
 
-    const ctx = await this.context();
-
-    const options = this.getOptions();
+    const options = this.getOptions()
 
     let {
-      Mailer: MailerPlugin,
+      Mailer: MailerPlugin
 
-    } = options;
+    } = options
 
 
     if (MailerPlugin === undefined) {
-      MailerPlugin = Mailer;
+      MailerPlugin = Mailer
     }
 
 
-    if (process.env.Sendmail === "true" && MailerPlugin) {
-
+    if (process.env.Sendmail === 'true' && MailerPlugin) {
       try {
         new MailerPlugin({
-          ctx,
-        }).start();
+          ctx
+        }).start()
+      } catch (error) {
+        console.error(error)
       }
-      catch (error) {
-        console.error(error);
-      }
-
     }
 
 
-    console.log(`Server is running on http://${process.env.HOST || "localhost"}:${process.env.PORT || 4000}`);
-
+    console.log(`Server is running on http://${process.env.HOST || 'localhost'}:${process.env.PORT || 4000}`)
   }
-
 }
 
 
@@ -260,12 +241,11 @@ export {
   CmsModule,
   modifyArgs,
   paginationMiddleware,
+  denyMutationsMiddleware,
 }
 
 export const startServer = function (options) {
-
-  return new PrismaCmsServer(options).startServer();
-
+  return new PrismaCmsServer(options).startServer()
 }
 
-export default startServer;
+export default startServer
