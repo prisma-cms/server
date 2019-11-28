@@ -23,13 +23,14 @@
     "@prisma-cms/prisma-processor": "latest",
     "@prisma-cms/prisma-schema": "latest",
     "chalk": "^2.4.1",
-    "graphql": "latest",
-    "graphql-cli": "^2.16.5",
+    "graphql": "14.0.2",
+    "graphql-cli": "2.16.5",
     "graphql-cli-generate-fragments": "^1.4.1",
+    "graphql-config": "2.0.1",
     "graphql-yoga": "^1.16.1",
     "merge-graphql-schemas": "latest",
-    "prisma-cli-core": "^1.19.1",
-    "prisma-cli-engine": "^1.19.1"
+    "prisma-cli-core": "^1.34.10",
+    "prisma-cli-engine": "^1.34.10"
   },
   "devDependencies": {
     "@prisma-cms/upload-module": "latest",
@@ -46,6 +47,7 @@
     "node": ">=10.x"
   },
   "resolutions": {
+    "graphql-config": "2.0.1",
     "graphql": "14.0.2"
   },
   "author": "Fi1osof",

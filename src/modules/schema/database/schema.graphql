@@ -1,0 +1,8 @@
+
+type Letter {
+  id: ID! @id
+}
+
+type Log {
+  id: ID! @id
+}
