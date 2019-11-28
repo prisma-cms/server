@@ -1,7 +1,7 @@
 
 import fs from "fs";
 
-import chalk from "chalk";
+// import chalk from "chalk";
 
 import PrismaModule from "@prisma-cms/prisma-module";
 import MailModule from "@prisma-cms/mail-module";

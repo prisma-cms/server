@@ -3,9 +3,8 @@ import chalk from "chalk";
 
 import prismaGenerateSchema from "@prisma-cms/prisma-schema";
 
-import {CmsModule as CoreModule} from "../../";
- 
- 
+import { CmsModule as CoreModule } from "../../";
+
 
 export const generateSchema = function (schemaType) {
 
@@ -13,7 +12,10 @@ export const generateSchema = function (schemaType) {
 
   try {
 
+    /* eslint-disable */
     const moduleURL = new URL(import.meta.url);
+    /* eslint-enable */
+    
     const basedir = path.join(path.dirname(moduleURL.pathname), "/../../../", "schema/")
 
     // console.log("basedir", basedir);

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -47,7 +47,6 @@
     "node": ">=10.x"
   },
   "resolutions": {
-    "graphql-config": "2.0.1",
     "graphql": "14.0.2"
   },
   "author": "Fi1osof",

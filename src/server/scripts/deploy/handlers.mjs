@@ -18,11 +18,9 @@ import GetSchema from 'graphql-cli/dist/cmds/get-schema'
 // import addEndpoint from 'graphql-cli/dist/cmds/add-endpoint'
 import GraphqlConfig from 'graphql-config'
 
-console.log('GraphqlConfig', GraphqlConfig);
-
 const {
   GraphQLEndpoint,
-} = GraphqlConfig;
+} = GraphqlConfig
 
 const {
   PrismaDefinitionClass,
@@ -45,20 +43,53 @@ const {
 } = PrismaCliCore
 
 
+// class GetSchemaContext extends GenerateFragments {
+//   getProjectConfig() {
+//     return {
+//       endpointsExtension: {
+//         getEndpoint: (url) => {
+
+//           console.log('endpointsExtension url', url);
+//           const endpoint = new GraphQLEndpoint({
+//             url,
+//           });
+
+//           return endpoint;
+//         },
+//       },
+//       app: {
+//         config: {
+//           extensions: {
+//             'prepare-bundle': {
+//               output: 'src/schema/generated/api.graphql'
+//             },
+//             'generate-fragments': {
+//               generator: 'js',
+//               output: 'src/schema/generated/api.fragments.js'
+//             },
+//           },
+//         },
+//       },
+//     }
+//   }
+
+//   async fragments() {
+//     let result
+
+//     try {
+//       result = await super.fragments()
+//     } catch (error) {
+//       this.context.spinner.fail(error.message)
+//     }
+
+//     return result
+//   }
+// }
+
+
 class CustomGenerateFragments extends GenerateFragments {
   getProjectConfig() {
     return {
-      endpointsExtension: {
-        getEndpoint: (url) => {
-
-          console.log('endpointsExtension url', url);
-          const endpoint = new GraphQLEndpoint({
-            url,
-          });
-
-          return endpoint;
-        },
-      },
       app: {
         config: {
           extensions: {
@@ -88,21 +119,52 @@ class CustomGenerateFragments extends GenerateFragments {
   }
 }
 
+
+class GetSchemaContext extends CustomGenerateFragments {
+  getProjectConfig() {
+    return {
+      ...super.getProjectConfig(),
+      endpointsExtension: {
+        getEndpoint: (url) => {
+          // console.log('endpointsExtension url', url);
+          const endpoint = new GraphQLEndpoint({
+            url,
+          })
+
+          return endpoint
+        },
+      },
+    }
+  }
+
+  // async fragments() {
+  //   let result
+
+  //   try {
+  //     result = await super.fragments()
+  //   } catch (error) {
+  //     this.context.spinner.fail(error.message)
+  //   }
+
+  //   return result
+  // }
+}
+
+
+
 const generator = new CustomGenerateFragments({
   spinner: ora('Generate fragments'),
   getConfig: (props) => {
-
-
     return {
       getProjectConfig: (props) => {
 
       },
-    };
+    }
   },
 }, {
-    project: "app",
-    // generator: "js",
-  });
+  project: 'app',
+  // generator: "js",
+})
 
 
 
@@ -148,7 +210,6 @@ const deploySchema = function (generateSchema) {
 
 
     class CustomPrismaDefinitionClass extends PrismaDefinitionClass {
-
       // getClusterName() {
 
       //   throw new Error ("getClusterName");
@@ -162,17 +223,15 @@ const deploySchema = function (generateSchema) {
       // }
 
       async getCluster(throws) {
-
-        const data = await super.getCluster(throws);
+        const data = await super.getCluster(throws)
 
         // console.log('getCluster data', data)
 
         data.name = 'local'
-        return data;
+        return data
       }
 
       async getClusterByEndpoint(data) {
-
         const cluster = await super.getClusterByEndpoint(data)
 
         // console.log('getClusterByEndpoint data', data)
@@ -206,8 +265,6 @@ const deploySchema = function (generateSchema) {
     class Deploy extends prismaDeploy {
       constructor(options) {
         super(options)
-
-        console.log('this.env', this.env)
 
         this.definition = new CustomPrismaDefinitionClass(
           this.env,
@@ -304,18 +361,15 @@ const deploySchema = function (generateSchema) {
 // }
 
 const getSchema = async function () {
-
-
   const result = await handler({
     spinner: ora('Get schema'),
     getConfig: () => {
-
-      const context = new CustomGenerateFragments({
+      const context = new GetSchemaContext({
         // spinner: ora('Generate fragments'),
         getConfig: (props) => {
           return {
             getProjectConfig: (props) => {
-              console.log('getProjectConfig', props)
+              // console.log('getProjectConfig', props)
             },
           }
         },
@@ -324,7 +378,7 @@ const getSchema = async function () {
         // generator: "js",
       })
 
-      return context;
+      return context
       // return new CustomGenerateFragments()
     }
   }, {

@@ -1,12 +1,9 @@
 
 
-import { generateSchema } from "./schema";
+import { generateSchema } from './schema'
 
 import {
   buildApiSchema,
-} from "./";
+} from './'
 
-// console.log("generateSchema", generateSchema);
-// console.log("buildApiSchema", buildApiSchema);
-
-buildApiSchema(generateSchema);
+buildApiSchema(generateSchema)
