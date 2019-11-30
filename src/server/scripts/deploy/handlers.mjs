@@ -275,39 +275,29 @@ const deploySchema = function (generateSchema) {
       }
 
       // const spinner = ora('Deploy schema');
-
       async run(props, args) {
-        // const spinner = ora('Deploy schema').start()
+        const spinner = ora('Deploy schema').start()
 
 
         try {
           const promise = super.run(props)
 
-          let result
 
-          // eslint-disable-next-line prefer-const
-          result = await promise
+          const result = await promise
             .catch(error => {
-              console.error('error', error)
-              // spinner.fail(error.message)
+              spinner.fail(error.message)
             })
 
-          // const {
-          //   stderr,
-          //   stdout,
-          // } = this.out
-
-          // const error = (stderr && stderr.output) || null
-
-          // if (error) {
-          //   console.error('stderr error', error)
-          //   // console.error('stderr', stderr)
-          // }
+          const {
+            // stderr,
+            stdout,
+          } = this.out
 
 
-          // if (stdout.output) {
-          //   // spinner.succeed(stdout.output)
-          // }
+
+          if (stdout.output) {
+            spinner.succeed(stdout.output)
+          }
 
           resolve(result)
 
