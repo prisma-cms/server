@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -22,6 +22,7 @@
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/prisma-processor": "latest",
     "@prisma-cms/prisma-schema": "latest",
+    "@prisma-cms/upload-module": "latest",
     "chalk": "^2.4.1",
     "graphql": "14.0.2",
     "graphql-cli": "2.16.5",
@@ -33,7 +34,6 @@
     "prisma-cli-engine": "^1.34.10"
   },
   "devDependencies": {
-    "@prisma-cms/upload-module": "latest",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.0",
     "eslint-config-standard": "^14.1.0",

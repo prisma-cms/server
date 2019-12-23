@@ -1,3 +1,7 @@
+2.6.2
+=====================================
+- Move @prisma-cms/upload-module to deps
+
 2.6.1
 =====================================
 - Fix errors messages
