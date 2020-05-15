@@ -228,6 +228,13 @@ const deploySchema = function (generateSchema) {
         // console.log('getCluster data', data)
 
         data.name = 'local'
+
+        /**
+         * Принудительно указываем, что сервер локальный и не надо
+         * использовать сервер авторизации призмы (бывает возникает
+         * такая проблема с серыми доменами типа local_prisma_1)
+         */
+        data.local = true
         return data
       }
 

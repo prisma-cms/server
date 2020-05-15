@@ -1,3 +1,7 @@
+2.6.3
+=====================================
+- Fix local endpoints
+
 2.6.2
 =====================================
 - Move @prisma-cms/upload-module to deps
