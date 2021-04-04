@@ -26,6 +26,11 @@ export const modifyArgs = function (source, args, ctx, info, modifier) {
 }
 
 const modifyArgsNew = function (source, args, ctx, info, modifier, where) {
+  /**
+   * ToDo: надо придумать какой-то счетчик вложенности или типа того.
+   * Если в модифаере добавлять условие массив или объект, то начинает выполняться
+   * вложенный модифаер и уходит в бесконечный цикл.
+   */
   if (typeof where === 'object') {
     if (Array.isArray(where)) {
       where.map(n => modifyArgsNew(source, args, ctx, info, modifier, n))
