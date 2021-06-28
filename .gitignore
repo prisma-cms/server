@@ -5,7 +5,7 @@
 /node_modules
 /umd
 npm-debug.log*
-*.lock
+# *.lock
 *.log
 /src/node_modules__
 /package-lock.json

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
