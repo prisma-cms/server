@@ -181,7 +181,7 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@prisma-cms/log-module@latest":
+"@prisma-cms/log-module@1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@prisma-cms/log-module/-/log-module-1.1.4.tgz#8c9f43f8d1b5748f8b740134358c22855c50779d"
   integrity sha512-1TueTsprjEQpK6Z7GiqSErbs3jdEZgo1OwplJxo9579hEjNOi5GYlvtB6gA8yNzi4vAdSibh0J94QqAAIywe3Q==
@@ -190,7 +190,7 @@
     chalk "^2.4.1"
     merge-graphql-schemas latest
 
-"@prisma-cms/mail-module@latest":
+"@prisma-cms/mail-module@1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@prisma-cms/mail-module/-/mail-module-1.2.3.tgz#20f08393add11b7cd26b73ce7601a5422d30fa67"
   integrity sha512-lS9MLfUkzymYeuP8Q+LIkI4nGRAX2p2IyfKxCYG87w/Y9m86PTW3vN+x+mSutzZ9yJzRLaLr+VQ0hfevXTSVpw==
@@ -201,14 +201,14 @@
     mailcomposer "^3.12.0"
     merge-graphql-schemas latest
 
-"@prisma-cms/prisma-context@latest":
+"@prisma-cms/prisma-context@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@prisma-cms/prisma-context/-/prisma-context-1.2.0.tgz#2aba9637d27b61821dbbc6681016a6d60444d241"
   integrity sha512-APSapXlsQkljVhPaFfomZtuuCk+88i2d5Tzb7cBBBMyu7a5ft0uHdkKoTOfjCASEEyEcOfwo/Dkjtv9wcYISxw==
   dependencies:
     prisma-binding "2.1.6"
 
-"@prisma-cms/prisma-module@latest":
+"@prisma-cms/prisma-module@1.4.0", "@prisma-cms/prisma-module@latest":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@prisma-cms/prisma-module/-/prisma-module-1.4.0.tgz#bd87200cd3be37b9cca59a33d299fd0e536ee0e2"
   integrity sha512-nGRN6L5t5GwqsUfULKPYsJ7XgtnDW0b4zYDdeEVDVk36CwYr38hxjW4OBm428lx/bV7hQpKNfqPb77LgJwiF/g==
@@ -216,7 +216,7 @@
     graphql "^14.0.2"
     merge-graphql-schemas "^1.5.7"
 
-"@prisma-cms/prisma-processor@latest":
+"@prisma-cms/prisma-processor@1.1.11":
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/@prisma-cms/prisma-processor/-/prisma-processor-1.1.11.tgz#4a07263194dfcd454913e2786a19d2710c356e41"
   integrity sha512-t0vSvD1kjNoIO/CF5LSCaGM+Hglp4M+sZySqfsUF3D8DIqdxt3OoMi3nwXGbZgWYlq66JahoNOynowszyfEPWw==
@@ -225,14 +225,14 @@
     jsonwebtoken latest
     moment latest
 
-"@prisma-cms/prisma-schema@latest":
+"@prisma-cms/prisma-schema@1.0.3-beta":
   version "1.0.3-beta"
   resolved "https://registry.yarnpkg.com/@prisma-cms/prisma-schema/-/prisma-schema-1.0.3-beta.tgz#44495e9762c1be51b65452e7c3b5c173e99fa5bd"
   integrity sha512-KTdADUqCcB2Zec/u+bBoyxbfgl2sl4goLBBPTBJSnq8OV+arYdpHB8VZ7vrWVegZP2ZR4m4utw8qAT5PjgKCTg==
   dependencies:
     graphql "^0.13.2"
 
-"@prisma-cms/upload-module@latest":
+"@prisma-cms/upload-module@1.6.4":
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/@prisma-cms/upload-module/-/upload-module-1.6.4.tgz#41217590dcb4dd6595341eeb407f987861959a8b"
   integrity sha512-P0o8Q6NSji165JyBAqQXIZA7nzxmfhVvQBRMqeaLASQvykWSrLB3KAtGbHLdqOxABVBuBXC+pNiE4WbWJQJ0dg==

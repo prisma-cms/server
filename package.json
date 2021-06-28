@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/server",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "description": "Server for @prisma-cms",
   "private": false,
   "main": "src/server/index",
@@ -16,13 +16,13 @@
     "build-api-fragments": "node --experimental-modules src/server/scripts/deploy/build-api-fragments"
   },
   "dependencies": {
-    "@prisma-cms/log-module": "latest",
-    "@prisma-cms/mail-module": "latest",
-    "@prisma-cms/prisma-context": "latest",
-    "@prisma-cms/prisma-module": "latest",
-    "@prisma-cms/prisma-processor": "latest",
-    "@prisma-cms/prisma-schema": "latest",
-    "@prisma-cms/upload-module": "latest",
+    "@prisma-cms/log-module": "1.1.4",
+    "@prisma-cms/mail-module": "1.2.3",
+    "@prisma-cms/prisma-context": "1.2.0",
+    "@prisma-cms/prisma-module": "1.4.0",
+    "@prisma-cms/prisma-processor": "1.1.11",
+    "@prisma-cms/prisma-schema": "1.0.3-beta",
+    "@prisma-cms/upload-module": "1.6.4",
     "chalk": "^2.4.1",
     "graphql": "14.0.2",
     "graphql-cli": "2.16.5",
